@@ -1,0 +1,616 @@
+{
+  "task": {
+    "0": {
+      "name": "research",
+      "description": "AnalystSorterPerSector-RM_ANALYST_SORTER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM AnalystSorterPerSector"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_ANALYST_SORTER"
+      }
+    },
+    "1": {
+      "name": "research",
+      "description": "tbRMCode-RM_CODE",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMCode"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_CODE"
+      }
+    },
+	  "2": {
+      "name": "research",
+      "description": "tbRMRecord-RM_RECORD",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecord"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD"
+      }
+    },
+	  "3": {
+      "name": "research",
+      "description": "tbRMRecordApprover-RM_RECORD_APPROVER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordApprover"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_APPROVER"
+      }
+    },
+	  "4": {
+      "name": "research",
+      "description": "tbRMRecordTicker-RM_RECORD_TICKER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordTicker"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_TICKER"
+      }
+    },
+	  "5": {
+      "name": "research",
+      "description": "tbRMRecordTopic-RM_RECORD_TOPIC",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordTopic"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_TOPIC"
+      }
+    },
+	  "6": {
+      "name": "research",
+      "description": "vwRMAnalystSectorTicker-RM_ANALYST_SECTOR",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM vwRMAnalystSectorTicker"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_ANALYST_SECTOR"
+      }
+    },
+    "7": {
+      "name": "account",
+      "description": "MULTI_PRODUCT_RPT-COMMISION_ACCOUNT",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM MULTI_PRODUCT_RPT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM COMMISION_ACCOUNT"
+      }
+    },
+    "8": {
+      "name": "account",
+      "description": "CLIENTACTIVITY-COMMISION_TICKER",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM CLIENTACTIVITY"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM COMMISION_TICKER"
+      }
+    },
+    "9": {
+      "name": "account",
+      "description": "COMM_RPT_ANNUALIZED_BUDGET-COMMISION_ANNUAL_BUDGET",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM COMM_RPT_ANNUALIZED_BUDGET"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM COMMISION_ANNUAL_BUDGET"
+      }
+    },
+    "10": {
+      "name": "account",
+      "description": "users_dly-M_OMS_USERS",
+      "source": {
+        "database": "omshist",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM users_dly"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_OMS_USERS"
+      }
+    },
+    "11": {
+      "name": "account",
+      "description": "market_maker_report_dly-M_OMS_MARKET_MAKER",
+      "source": {
+        "database": "omshist",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM market_maker_report_dly"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_OMS_MARKET_MAKER"
+      }
+    },
+    "12": {
+      "name": "accountpt",
+      "description": "REVTRADERSYMBOL-PT_REVTRADERSYMBOL",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM REVTRADERSYMBOL WHERE TRANSACTION_DATE >='2014-01-01'"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PT_REVTRADERSYMBOL"
+      }
+    },
+    "13": {
+      "name": "accountpt",
+      "description": "LR_TRD_LOSS_CAPT_SUM_TRADER_VW - PT_LR_TRD_LOSS_CAPT_SUM_TRADER_VW",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM LR_TRD_LOSS_CAPT_SUM_TRADER_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PT_LR_TRD_LOSS_CAPT_SUM_TRADER_VW"
+      }
+    },
+    "14": {
+      "name": "accountpt",
+      "description": "PNL_POSITION - PT_PNL_POSITION",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM PNL_POSITION WHERE POSITION_DT >='2014-01-01'"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PT_PNL_POSITION"
+      }
+    },
+    "15": {
+      "name": "parent",
+      "description": "PARENT_ACCOUNT - PARENT_ACCOUNT",
+      "source": {
+        "database": "CONSENCORE",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT"
+      }
+    },
+    "16": {
+      "name": "parent",
+      "description": "BBG_EQUITY_NAMR_DAT - EQUITY_DAT",
+      "source": {
+        "database": "CONSENCORE",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM BBG_EQUITY_NAMR_DAT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM EQUITY_DAT"
+      }
+    },
+    "17": {
+      "name": "tickermaster",
+      "description": "BBG_EQUITY_NAMR_PX - M_TICKER_MASTER_BB",
+      "source": {
+        "database": "CLRSTG",
+        "user": "Prism",
+        "pass": "048SeKdN",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM BBG_EQUITY_NAMR_PX"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_TICKER_MASTER_BB"
+      }
+    },
+    "18": {
+      "name": "tickermaster",
+      "description": "BBG_EQUITY_NAMR_DAT - M_TICKER_MASTER_SECTOR",
+      "source": {
+        "database": "CLRSTG",
+        "user": "Prism",
+        "pass": "048SeKdN",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM BBG_EQUITY_NAMR_DAT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_TICKER_MASTER_SECTOR"
+      }
+    },
+    "19": {
+      "name": "MOT",
+      "description": "INST_SALESMAN_PARENT_XREF - SALESMAN_PARENT_XREF",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM INST_SALESMAN_PARENT_XREF"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM SALESMAN_PARENT_XREF"
+      }
+    },
+    "20": {
+      "name": "MOT",
+      "description": "INST_SALESMAN - SALESMAN_INST",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM INST_SALESMAN"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM SALESMAN_INST"
+      }
+    },
+    "21": {
+      "name": "CONSENCORE",
+      "description": "PARENT_ACCOUNT - PARENT_ACCOUNT",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT"
+      }
+    },
+    "22": {
+      "name": "MOT",
+      "description": "PARENT_ACCOUNT_CLASSIFICATION - PARENT_ACCOUNT_CLASSIFICATION",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT_CLASSIFICATION"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM PARENT_ACCOUNT_CLASSIFICATION"
+      }
+    },
+    "23": {
+      "name": "MOT",
+      "description": "ACCT_MASTER_PARENT - COMMISION_MASTER_ACCT",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM ACCT_MASTER_PARENT"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM COMMISION_MASTER_ACCT"
+      }
+    },
+    "24": {
+      "name": "MOT",
+      "description": "INST_TRADER_PARENT_XREF - TRADER_PARENT_XREF",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM INST_TRADER_PARENT_XREF"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM TRADER_PARENT_XREF"
+      }
+    },
+    "25": {
+      "name": "MOT",
+      "description": "INST_TRADER - INST_TRADER",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM INST_TRADER"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM INST_TRADER"
+      }
+    },
+    "26": {
+      "name": "employee",
+      "description": "Employee - EMPLOYEE_SUMMARY",
+      "source": {
+        "database": "ADMIN",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM Employee"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM EMPLOYEE_SUMMARY"
+      }
+    },
+    "27": {
+      "name": "expense",
+      "description": "CRM_PRISM_VW - M_EXPENSES_RAW",
+      "source": {
+        "database": "COWP1PF",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "NJPSDB01",
+        "query": "SELECT count(1) AS cnt FROM SYSADM.CRM_PRISM_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_EXPENSES_RAW"
+      }
+    },
+    "28": {
+      "name": "expense",
+      "description": "CRM_PRISM_EXP_LINE_VW - M_CRM_PRISM_EXP_LINE_VW",
+      "source": {
+        "database": "COWP1PF",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "NJPSDB01",
+        "query": "SELECT count(1) AS cnt FROM SYSADM.CRM_PRISM_EXP_LINE_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_CRM_PRISM_EXP_LINE_VW"
+      }
+    },
+    "29": {
+      "name": "expense",
+      "description": "CRM_PRISM_EXP_DIST_VW - M_CRM_PRISM_EXP_DIST_VW",
+      "source": {
+        "database": "COWP1PF",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "NJPSDB01",
+        "query": "SELECT count(1) AS cnt FROM SYSADM.CRM_PRISM_EXP_DIST_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_CRM_PRISM_EXP_DIST_VW"
+      }
+    },
+    "30": {
+      "name": "expense",
+      "description": "CRM_PRISM_EXP_ATT_VW - M_CRM_PRISM_EXP_ATT_VW",
+      "source": {
+        "database": "COWP1PF",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "NJPSDB01",
+        "query": "SELECT count(1) AS cnt FROM SYSADM.CRM_PRISM_EXP_ATT_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_CRM_PRISM_EXP_ATT_VW"
+      }
+    },
+    "31": {
+      "name": "expense",
+      "description": "CRM_PRISM_EXP_EMPATT_VW - M_CRM_PRISM_EXP_EMPATT_VW",
+      "source": {
+        "database": "COWP1PF",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "NJPSDB01",
+        "query": "SELECT count(1) AS cnt FROM SYSADM.CRM_PRISM_EXP_EMPATT_VW"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM M_CRM_PRISM_EXP_EMPATT_VW"
+      }
+    },
+    "32": {
+      "name": "ATM",
+      "description": "DASH_ATM_RAVENUE - ATM_REVENUE",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM DASH_ATM_RAVENUE"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM ATM_REVENUE"
+      }
+    },
+    "33": {
+      "name": "ATM",
+      "description": "DASH_LOSS_DAILY - Dash_Loss",
+      "source": {
+        "database": "MOT",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM DASH_LOSS_DAILY"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "cD#4Xbb9",
+        "server": "NJPRISMDB01",
+        "query": "SELECT count(1) AS cnt FROM Dash_Loss"
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "task": {
+    "0": {
+      "name": "research",
+      "description": "AnalystSorterPerSector-RM_ANALYST_SORTER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM AnalystSorterPerSector"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_ANALYST_SORTER"
+      }
+    },
+    "1": {
+      "name": "research",
+      "description": "tbRMCode-RM_CODE",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMCode"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_CODE"
+      }
+    },
+	"2": {
+      "name": "research",
+      "description": "tbRMRecord-RM_RECORD",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecord"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD"
+      }
+    },
+	"3": {
+      "name": "research",
+      "description": "tbRMRecordApprover-RM_RECORD_APPROVER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordApprover"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_APPROVER"
+      }
+    },
+	"4": {
+      "name": "research",
+      "description": "tbRMRecordTicker-RM_RECORD_TICKER",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordTicker"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_TICKER"
+      }
+    },
+	"5": {
+      "name": "research",
+      "description": "tbRMRecordTopic-RM_RECORD_TOPIC",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM tbRMRecordTopic"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_RECORD_TOPIC"
+      }
+    },
+	"6": {
+      "name": "research",
+      "description": "vwRMAnalystSectorTicker-RM_ANALYST_SECTOR",
+      "source": {
+        "database": "ResearchMetricsDB",
+        "user": "iir_usr",
+        "pass": "reB9#bbB",
+        "server": "njsqlbv1",
+        "query": "SELECT count(1) AS cnt FROM vwRMAnalystSectorTicker"
+      },
+      "destination": {
+        "database": "PRISM",
+        "user": "iir_usr",
+        "pass": "pass789",
+        "server": "NJDBDEV02",
+        "query": "SELECT count(1) AS cnt FROM RM_ANALYST_SECTOR"
+      }
+    }
+  }
+}

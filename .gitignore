@@ -1,2 +1,7 @@
+global/config.php
+
 assets/uploads/*
 assets/export/*
+backup/*
+tmp/*
+downloads/*
