@@ -18,8 +18,8 @@ class controlPrefer extends modelPrefer
 		/*$file = $this->path . date('dMY') .'-COWEN-BM'. '.txt';
 		$fileInfoNew = $this->getFileDetails($file);
 		echo "<pre>";print_r($fileInfoNew);echo "</pre>";exit;*/
-		$file = date('dMY') .'-COWEN-BM'. '.txt';
-		if($this->sendFile($file)) {
+		//$file = date('dMY') .'-COWEN-BM'. '.txt';
+		if($this->sendFile()) {
 			echo "file write success...";
 		} else {
 			echo "file write failed...";
@@ -46,7 +46,7 @@ class controlPrefer extends modelPrefer
 		//var_dump($frmt);
 	}
 	
-	private function sendFile($source) {
+	private function sendFile() {
 		/* $sftp = new libSftp();
 		$send = $sftp->upload($source, $this->sftpFile);
 		if(!$send) {
@@ -85,7 +85,7 @@ return true;
 	 * --Not derived yet--
 	 ******/
 	private function sendMail($status, $data) {
-		
+		fwrite(STDERR, "Sending mail...\r\n");
 		$cc = $this->emailCc; 
 		$to = $this->emailTo;
 		$sub = 'Preference file update : ' . $status;
@@ -95,9 +95,11 @@ return true;
 		{
 			//echo "<br>mail success";
 			return true;
+			fwrite(STDERR, "Mail sent successfully...\r\n");
 		}
 		else{
 			//echo "<br>mail fail";
+			fwrite(STDERR, "Mail sending failed...\r\n");
 			return false;
 		}
 	}
@@ -108,6 +110,7 @@ return true;
 	 * @return : array();
 	 ******/
 	private function getFileDetails($filename) {
+		fwrite(STDERR, "Getting file info $filename ...\r\n");
 		$info = array();
 		$file = $filename;
 		$info['exists'] = file_exists($file);
@@ -156,6 +159,7 @@ return true;
 	 * @param2 : string => fully formated string to append to destination file
 	 ******/
 	private function appendData($dest, $data) {
+		fwrite(STDERR, "Appending data...\r\n");
 		try {
 			// Write the contents to the file, 
 			// using the FILE_APPEND flag to append the content to the end of the file
@@ -194,7 +198,9 @@ return true;
 		$destination = $this->path . $file;
 
 		$fileInfo = $this->getFileDetails($destination);
-
+		
+		fwrite(STDERR, "File writing progress...\r\n");
+		
 		if(!$fileInfo['exists']) {
 			$data = $this->addSeparator($dataArray['head']);
 			$this->appendData($destination, $data);
@@ -203,21 +209,21 @@ return true;
 		if(count($dataArray['body']) > 0) {
 			foreach($dataArray['body'] as $arr) {
 				$data = $this->addSeparator($arr);
-				$searchRes = $this->searchInFile($arr[0], $destination);
+				//$searchRes = $this->searchInFile($arr[0], $destination);
 				$insert = true;
-				if($searchRes) {
+				/* if($searchRes) {
 					foreach($searchRes as $sRes) {
 						if(trim($sRes) == trim($data)) {
 							$insert = false;
 						}
 					}
-				} 
+				} */ 
 				if($insert == true) {
 					$this->appendData($destination, $data);
 				}
 			}
 		}
-
+		fwrite(STDERR, "File writing completed...\r\n");
 		$fileInfoNew = $this->getFileDetails($destination);
 
 		if($fileInfoNew['exists'] AND $fileInfoNew['size'] >= $fileInfo['size']) {
@@ -228,7 +234,9 @@ return true;
 	
 	public function generate() {
 		$time = microtime();
-
+		
+		fwrite(STDERR, "Starting the process...\r\n");
+		
 		$dataArray = array();
 		$filename = date('dMY') .'-COWEN-BM'. '.txt';
 
@@ -267,10 +275,11 @@ return true;
 			}
 
 			$dataArray['body'][] = $temp;
+			unset($temp);
 		}
-		
+		fwrite(STDERR, "Data's arranged successfully...\r\n");
 		$gen = $this->updateFile($filename, $dataArray, 'BM');
-		
+		unset($dataArray);
 		$time1 = microtime();
 		$exec_time = $time1 - $time;
 
