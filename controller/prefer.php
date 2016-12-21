@@ -169,12 +169,12 @@ return true;
 	 * @param2 : string => fully formated string to append to destination file
 	 ******/
 	private function appendData($dest, $data) {
-		fwrite(STDERR, "Appending data...\r\n");
+		//fwrite(STDERR, "Appending data...\r\n");
 		try {
 			// Write the contents to the file, 
 			// using the FILE_APPEND flag to append the content to the end of the file
 			// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-			//$write = file_put_contents($dest, $data, FILE_APPEND | LOCK_EX);
+			$write = file_put_contents($dest, $data, FILE_APPEND | LOCK_EX);
 			if(!$write) {
 				throw new Exception("File data append error on file : ".$dest);
 			}

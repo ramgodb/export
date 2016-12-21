@@ -26,6 +26,7 @@ class controlCompare extends modelCompare
 			}
 		} elseif($action == 'all') {
 			$res = $this->check($action);
+			$res[$action] = $res['email'] . '--' . $res['salesforce'];
 			if($res['email'] > 0 || $res['salesforce'] > 0) {
 				$mail = true;
 			}
@@ -44,7 +45,7 @@ class controlCompare extends modelCompare
 			$subject = 	APP ." - " . strtoupper($action) . " Query check : Fail";
 			$mail = $this->sendMail($subject, $msg);
 		}
-		echo "Success...";
+		echo "Success...\r\n" . $action ." ".$res[$action];
 	}
 
 	private function sendMail($subject, $message) {
@@ -104,12 +105,16 @@ class controlCompare extends modelCompare
 		if(!$available) {
 			$msg .= "<tr><td colspan='5' align='center'>Error..</td></tr>";
 			//echo "Error : Set value provided is wrong...";
+			echo "No data available....\r\n";
 		}
 		$msg .= "</table>";
-		$subject = "DEV - " . strtoupper($set) . " BCP Check : " . (($status == true) ? "Pass" : "Fail");
+		$subject = APP . " - " . strtoupper($set) . " BCP Check : " . (($status == true) ? "Pass" : "Fail");
 		$mail = $this->sendMail($subject, $msg);
-		echo "<h3>".$subject."</h3>";
-		echo $msg;
+		//echo "<h3>".$subject."</h3>";
+		//echo $msg;
+		if($mail) {
+			echo "Mail success....\r\n";
+		}
 	}
 
 	public function dashboard($batch = '') {
@@ -151,11 +156,15 @@ class controlCompare extends modelCompare
 		if(!$available) {
 			$msg .= "<tr><td colspan='5' align='center'>Error..</td></tr>";
 			//echo "Error : Set value provided is wrong...";
+			echo "No data available....\r\n";
 		}
 		$msg .= "</table>";
 		$subject = 	APP ." - " . strtoupper($set) . " DASHBOARD Check : " . (($status == true) ? "Pass" : "Fail");
 		$mail = $this->sendMail($subject, $msg);
-		echo $msg;
+		//echo $msg;
+		if($mail) {
+			echo "Mail success....\r\n";
+		}
 	}
 }
 ?>
