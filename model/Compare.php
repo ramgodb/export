@@ -6,6 +6,24 @@ class modelCompare extends libDatabase
 		parent::__construct();
 	}
 
+	protected function check($action) {
+		$emailQry = "SELECT COUNT(bulk_email_id) AS cnt FROM T_BULK_EMAIL WHERE email_date > DATEADD(MINUTE, -16, GETDATE()) AND email_date < DATEADD(MINUTE, -10, GETDATE()) AND complete_datetime is null";
+		$sfQry = "SELECT COUNT(id) AS cnt FROM T_SALESFORCE_UPDATE WHERE date > DATEADD(MINUTE, -16, GETDATE()) AND date < DATEADD(MINUTE, -10, GETDATE()) AND (sf_id is null OR sf_updated_date is null OR sf_response is null)";
+		
+		if($action == 'email') {
+			$emailRow = $this->fetch_assoc($emailQry);
+		} elseif($action == 'salesforce') {
+			$sfRow = $this->fetch_assoc($sfQry);
+		} else {
+			$emailRow = $this->fetch_assoc($emailQry);
+			$sfRow = $this->fetch_assoc($sfQry);
+		}
+		$output = array();
+		$output['email'] = (isset($emailRow[0]['cnt']) ? $emailRow[0]['cnt'] : null);
+		$output['salesforce'] = (isset($sfRow[0]['cnt']) ? $sfRow[0]['cnt'] : null);
+		return $output;
+	}
+
 	protected function dashQuery($qry, $table) {
 		$tblQry = "SELECT TOP 1 count FROM T_DASHBOARD_CHECK_LOG WHERE table_name='".$table."' AND date >= DATEADD(DAY, -1, GETDATE()) ORDER BY date ASC";
 		$tblRow = $this->fetch_assoc($tblQry);

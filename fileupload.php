@@ -1,4 +1,8 @@
 <?php
+if (PHP_SAPI != 'cli') {
+	echo "Invalid Access...";
+}
+include_once('global/config.php');
 /* force UTC as default time format */
 date_default_timezone_set ("UTC");
 
@@ -7,23 +11,15 @@ include('Net/SSH2.php');
 include('Net/SFTP.php');
 
 $output = array('error' => false, 'msg' => '');
-$destination = "/incoming/BMEntitlements.txt";
-//$checkid = trim($_REQUEST['id']);
-$source = "./assets/export/" . date('dMY') .'-COWEN-BM'. '.txt'; //trim($_REQUEST['file']);
+$destination = BM_SFTP_PATH . "BMEntitlements.txt";
+$source = "./assets/export/" . date('dMY') .'-COWEN-BM'. '.txt';
 
-/* if($checkid != $_SESSION['export_upload']) {
-	$output['error'] = true;
-	$output['msg'] = "Illeagel access...";
-} elseif($checkid == '' OR $source == '') {
-	$output['error'] = true;
-	$output['msg'] = "Empty values...";
-} else */if(!file_exists($source)) {
+if(!file_exists($source)) {
 	$output['error'] = true;
 	$output['msg'] = "Source file not available...";
 } else {
-	$sftp = new Net_SFTP('ftp.bluematrix.com',22);
-	if (!$sftp->login('cowendev', 'db5RM0wk-')) { //if you can't log on...
-		//exit('sftp Login Failed');
+	$sftp = new Net_SFTP(BM_SFTP_HOST,22);
+	if (!$sftp->login(BM_SFTP_USER, BM_SFTP_PASS)) { 
 		$output['error'] = true;
 		$output['msg'] = "sftp Login Failed...";
 	} else {

@@ -98,7 +98,7 @@ return true;
 		fwrite(STDERR, "Sending mail...\r\n");
 		$cc = $this->emailCc; 
 		$to = $this->emailTo;
-		$sub = 'Preference file update : ' . $status;
+		$sub = APP . ' Preference file update : ' . $status;
 		$body = $data;
 		$mail = new libMail();
 		if($mail->send_email(null,$to,$sub,$body,$cc))
@@ -174,7 +174,7 @@ return true;
 			// Write the contents to the file, 
 			// using the FILE_APPEND flag to append the content to the end of the file
 			// and the LOCK_EX flag to prevent anyone else writing to the file at the same time
-			$write = file_put_contents($dest, $data, FILE_APPEND | LOCK_EX);
+			//$write = file_put_contents($dest, $data, FILE_APPEND | LOCK_EX);
 			if(!$write) {
 				throw new Exception("File data append error on file : ".$dest);
 			}

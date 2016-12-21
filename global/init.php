@@ -129,12 +129,10 @@ spl_autoload_register(function($name){
 	}
 	if(file_exists($requirePath)) {
 		include_once($requirePath);
-		return;
+		return true;
 	} else {
-		error_log("class name could not be resolved $name");
-		throw new Exception("Invalid class name ... $name");
+        return false;
 	}
-	return false;
 });
 
 /*****

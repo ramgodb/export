@@ -11,6 +11,42 @@ class controlCompare extends modelCompare
 		$this->emailCc = SITE_EMAIL_SUPPORT;
 	}
 
+	public function index($param = array()) {
+		$action = $param[0];
+		$mail = false;
+		if($action == 'email') {
+			$res = $this->check($action);
+			if($res['email'] > 0) {
+				$mail = true;
+			}
+		} elseif($action == 'salesforce') {
+			$res = $this->check($action);
+			if($res['salesforce'] > 0) {
+				$mail = true;
+			}
+		} elseif($action == 'all') {
+			$res = $this->check($action);
+			if($res['email'] > 0 || $res['salesforce'] > 0) {
+				$mail = true;
+			}
+		} else {
+			echo "Invalid parameter...";exit;
+		}
+
+		if($mail) {
+			$msg = '<div id="cowen-export-wrap" style="width: 300px;padding: 3px;border: 2px #666 solid;margin: 5px;"><h3 style="padding: 3px;background-color: #666;font-weight: bold;color:#FFF;">'.APP.' - Query check</h3><div style="padding: 3px;">Date : '.date("Y-m-d H:i:s").'</div>';
+			if($action == 'all') {
+				$msg .= '<div style="padding: 3px;">Email : '.(($res['email'] > 0) ? 'Fail' : 'Pass').'</div><div style="padding: 3px;">Un processed rows : '.$res['email'].'</div><div style="padding: 3px;">Salesforce : '.(($res['salesforce'] > 0) ? 'Fail' : 'Pass').'</div><div style="padding: 3px;">Un processed rows : '.$res['salesforce'].'</div>';
+			} else {
+				$msg .= '<div style="padding: 3px;">'.ucfirst($action).' : '.(($res[$action] > 0) ? 'Fail' : 'Pass').'</div><div style="padding: 3px;">Un processed rows : '.$res[$action].'</div>';
+			}
+			$msg .= '</div>';
+			$subject = 	APP ." - " . strtoupper($action) . " Query check : Fail";
+			$mail = $this->sendMail($subject, $msg);
+		}
+		echo "Success...";
+	}
+
 	private function sendMail($subject, $message) {
 		$cc = $this->emailCc; 
 		$to = $this->emailTo;
