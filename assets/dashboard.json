@@ -1,0 +1,56 @@
+{
+  "batch1": {
+    "0": {
+      "table": "D_ACCOUNT_COVERAGE_EMAILS",
+      "query": "select count(1) AS cnt from D_ACCOUNT_COVERAGE_EMAILS with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_ACCOUNT_CVG",
+      "query": "select count(1) AS cnt from D_ACCOUNT_CVG with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_ACCOUNT_READERSHIP",
+      "query": "select count(1) AS cnt from D_ACCOUNT_READERSHIP with(nolock)",
+      "rows": 1
+    }
+  },
+  "batch2": {
+    "0": {
+      "table": "D_READERSHIPACC_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART group by period_filter",
+      "rows": 4
+    },
+    "1": {
+      "table": "D_SECTORHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART group by period_filter",
+      "rows": 4
+    },
+    "2": {
+      "table": "D_READERSHIPDOCUMENT_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART group by period_filter",
+      "rows": 4
+    },
+    "3": {
+      "table": "D_DOCUMENTTYPEHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART group by period_filter",
+      "rows": 4
+    },
+    "4": {
+      "table": "D_CHANNELREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    },
+    "5": {
+      "table": "D_TICKERREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_TICKERREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    },
+    "6": {
+      "table": "D_ANALYSTREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    }
+  }
+}

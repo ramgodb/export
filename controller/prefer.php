@@ -54,31 +54,41 @@ class controlPrefer extends modelPrefer
 		}
 		return true; */
 		
-		set_include_path(ROOT_PATH);
+		//set_include_path(ROOT_PATH);
 		
 		$enc = time();
 		$_SESSION['export_upload'] = $enc;
 		
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		//$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+		//session_write_close();
+
 		$qry_str = '';//"?x=10&y=20";
 		$ch = curl_init();
 		// Set query data here with the URL
 		curl_setopt($ch, CURLOPT_URL, HTTP_PATH . 'fileupload.php' . $qry_str); 
+
+		curl_setopt($ch,CURLOPT_USERAGENT, $useragent);
+		//curl_setopt( $ch, CURLOPT_COOKIE, $strCookie );
+
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-		curl_setopt($ch, CURLOPT_USERPWD, "jayakaranv:Password27");
+		//curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+		//curl_setopt($ch, CURLOPT_USERPWD, "jayakaranv:Password27");
 		curl_setopt($ch, CURLOPT_TIMEOUT, '3');
 		$content = trim(curl_exec($ch));
 		curl_close($ch);
-		print $content;
+		var_dump($content);
+
 return true;
-		/* $result = file_get_contents("./fileupload.php", FILE_USE_INCLUDE_PATH);
-		$res = json_decode($result);
-		var_dump($res);
-		if($res->error) {
+
+		//$result = file_get_contents("./fileupload.php", FILE_USE_INCLUDE_PATH);
+		//$res = json_decode($result);
+		//var_dump($res);
+		/*if($res->error) {
 			return false;
 		} else {
 			return true;
-		} */
+		}*/
 	}
 	
 	/******

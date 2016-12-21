@@ -6,6 +6,53 @@ class modelCompare extends libDatabase
 		parent::__construct();
 	}
 
+	protected function dashQuery($qry, $table) {
+		$tblQry = "SELECT TOP 1 count FROM T_DASHBOARD_CHECK_LOG WHERE table_name='".$table."' AND date >= DATEADD(DAY, -1, GETDATE()) ORDER BY date ASC";
+		$tblRow = $this->fetch_assoc($tblQry);
+		$prevCount = 0;
+		if(COUNT($tblRow) > 0) {
+			$prevCount = $tblRow[0]['count'];
+		}
+
+		$count = array(0 => $prevCount);
+		$res = $this->fetch_assoc($qry);
+		$row = count($res);
+		if(!empty($res) AND $res != '') {
+			if($row > 1) {
+				$temp = "";
+				foreach($res as $result) {
+					if(count($result) > 2) {
+						foreach($result as $key => $val) {
+							$temp .= "[ ".$key ."=".$val." ]<br />";
+						}
+					} else {
+						$key='';
+						foreach($result as $val) {
+							if($key=='') {
+								$key = $val;
+							} else {
+								$temp .= "[ ".$key ."=".$val." ]<br />";
+								$key = '';
+							}
+						}
+					}
+				}
+				$count[1] = $temp;
+			} else {
+				$count[1] = $res[0]['cnt'];
+			}
+		} else {
+			$count[1] = 0;
+		}
+		return array($count, $row);
+	}
+
+	protected function dashLog($table,$count,$batch) {
+
+		$ins = $this->query("INSERT INTO T_DASHBOARD_CHECK_LOG (batch_name, batch_id, table_name, count, date) VALUES ('$batch', '$this->sessionid', '$table', '$count', GETDATE())");
+		return $ins;
+	}
+
 	protected function compare($sourceSet, $destSet) {
 		$server = $sourceSet->server;
 		$user = $sourceSet->user;

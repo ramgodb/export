@@ -1,0 +1,406 @@
+{
+  "batch1": {
+    "0": {
+      "table": "D_ACCOUNT_COVERAGE_EMAILS",
+      "query": "select count(1) AS cnt from D_ACCOUNT_COVERAGE_EMAILS with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_ACCOUNT_CVG",
+      "query": "select count(1) AS cnt from D_ACCOUNT_CVG with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_ACCOUNT_READERSHIP",
+      "query": "select count(1) AS cnt from D_ACCOUNT_READERSHIP with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_ACTION_TYPE_MASTER",
+      "query": "select count(1) AS cnt from D_ACTION_TYPE_MASTER with(nolock)",
+      "rows": 1
+    },
+    "4": {
+      "table": "D_ANALYST_FADING_CONTACTS",
+      "query": "select count(1) AS cnt from D_ANALYST_FADING_CONTACTS with(nolock)",
+      "rows": 1
+    },
+    "5": {
+      "table": "D_ANALYST_FOCUSSED",
+      "query": "select count(1) AS cnt from D_ANALYST_FOCUSSED with(nolock)",
+      "rows": 1
+    },
+    "6": {
+      "table": "D_ANALYST_INFO",
+      "query": "select count(1) AS cnt from D_ANALYST_INFO with(nolock)",
+      "rows": 1
+    },
+    "7": {
+      "table": "D_ANALYST_READERSHIP",
+      "query": "select count(1) AS cnt from D_ANALYST_READERSHIP with(nolock)",
+      "rows": 1
+    },
+    "8": {
+      "table": "D_ANALYSTREADERSHIP_CHART",
+      "query": "select count(1) AS cnt from D_ANALYSTREADERSHIP_CHART with(nolock)",
+      "rows": 1
+    },
+    "9": {
+      "table": "D_BULLETIN",
+      "query": "select count(1) AS cnt from D_BULLETIN with(nolock)",
+      "rows": 1
+    },
+    "10": {
+      "table": "D_CHANNELREADERSHIP_CHART",
+      "query": "select count(1) AS cnt from D_CHANNELREADERSHIP_CHART with(nolock)",
+      "rows": 1
+    },
+    "11": {
+      "table": "D_CLIENT_COVERAGE",
+      "query": "select count(1) AS cnt from D_CLIENT_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "12": {
+      "table": "D_CLIENT_COVERAGE_EXTENDED",
+      "query": "select count(1) AS cnt from D_CLIENT_COVERAGE_EXTENDED with(nolock)",
+      "rows": 1
+    },
+    "13": {
+      "table": "D_CLIENT_DASH",
+      "query": "select count(1) AS cnt from D_CLIENT_DASH with(nolock)",
+      "rows": 1
+    },
+    "14": {
+      "table": "D_CLIENT_INFO",
+      "query": "select count(1) AS cnt from D_CLIENT_INFO with(nolock)",
+      "rows": 1
+    },
+    "15": {
+      "table": "D_CLIENT_PROSPECT_COVERAGE",
+      "query": "select count(1) AS cnt from D_CLIENT_PROSPECT_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "16": {
+      "table": "D_CLIENT_PROSPECT_INFO",
+      "query": "select count(1) AS cnt from D_CLIENT_PROSPECT_INFO with(nolock)",
+      "rows": 1
+    },
+    "17": {
+      "table": "D_CLIENT_RESOURCE_ALLOCATION",
+      "query": "select count(1) AS cnt from D_CLIENT_RESOURCE_ALLOCATION with(nolock)",
+      "rows": 1
+    },
+    "18": {
+      "table": "D_CLIENT_RESOURCE_ALLOCATION_ANALYST",
+      "query": "select count(1) AS cnt from D_CLIENT_RESOURCE_ALLOCATION_ANALYST with(nolock)",
+      "rows": 1
+    },
+    "19": {
+      "table": "D_CLIENT_RESOURCE_ALLOCATION_CHART",
+      "query": "select count(1) AS cnt from D_CLIENT_RESOURCE_ALLOCATION_CHART with(nolock)",
+      "rows": 1
+    },
+    "20": {
+      "table": "D_CLIENT_RESOURCE_ALLOCATION_SUMMARY",
+      "query": "select count(1) AS cnt from D_CLIENT_RESOURCE_ALLOCATION_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "21": {
+      "table": "D_CLIENT_ROI",
+      "query": "select count(1) AS cnt from D_CLIENT_ROI with(nolock)",
+      "rows": 1
+    },
+    "22": {
+      "table": "D_COMISSION_ACCOUNT_REGION",
+      "query": "select count(1) AS cnt from D_COMISSION_ACCOUNT_REGION with(nolock)",
+      "rows": 1
+    },
+    "23": {
+      "table": "D_COMMISSIONS_ACCOUNT",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT with(nolock)",
+      "rows": 1
+    },
+    "24": {
+      "table": "D_COMMISSIONS_ACCOUNT_PREV",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_PREV with(nolock)",
+      "rows": 1
+    },
+    "25": {
+      "table": "D_COMMISSIONS_ACCOUNT_SECTOR",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_SECTOR with(nolock)",
+      "rows": 1
+    },
+    "26": {
+      "table": "D_COMMISSIONS_ACCOUNT_TICKER",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_TICKER with(nolock)",
+      "rows": 1
+    },
+    "27": {
+      "table": "D_COMMUNICATE_SEARCH_HOLDING",
+      "query": "select count(1) AS cnt from D_COMMUNICATE_SEARCH_HOLDING with(nolock)",
+      "rows": 1
+    },
+    "28": {
+      "table": "D_CONTACT",
+      "query": "select count(1) AS cnt from D_CONTACT with(nolock)",
+      "rows": 1
+    },
+    "29": {
+      "table": "D_DOCUMENTTYPEHITS_CHART",
+      "query": "select count(1) AS cnt from D_DOCUMENTTYPEHITS_CHART with(nolock)",
+      "rows": 1
+    },
+    "30": {
+      "table": "D_EXPENSE_SUMMARY",
+      "query": "select count(1) AS cnt from D_EXPENSE_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "31": {
+      "table": "D_FADDING_ACCOUNTS",
+      "query": "select count(1) AS cnt from D_FADDING_ACCOUNTS with(nolock)",
+      "rows": 1
+    },
+    "32": {
+      "table": "D_POS_TRADER_MASTER",
+      "query": "select count(1) AS cnt from D_POS_TRADER_MASTER with(nolock)",
+      "rows": 1
+    },
+    "33": {
+      "table": "D_POSITION_TRADER",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER with(nolock)",
+      "rows": 1
+    },
+    "34": {
+      "table": "D_POSITION_TRADER_CLIENT_TICKER",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_CLIENT_TICKER with(nolock)",
+      "rows": 1
+    },
+    "35": {
+      "table": "D_POSITION_TRADER_COMM_DETAILS",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_COMM_DETAILS with(nolock)",
+      "rows": 1
+    },
+    "36": {
+      "table": "D_POSITION_TRADER_COMMISSION",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_COMMISSION with(nolock)",
+      "rows": 1
+    },
+    "37": {
+      "table": "D_PREFERENCE_CONTACT",
+      "query": "select count(1) AS cnt from D_PREFERENCE_CONTACT with(nolock)",
+      "rows": 1
+    },
+    "38": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION with(nolock)",
+      "rows": 1
+    },
+    "39": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_CHART",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_CHART with(nolock)",
+      "rows": 1
+    },
+    "40": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_SUMMARY",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "41": {
+      "table": "D_PROSPECT_CONFERENCE_MEETING_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_CONFERENCE_MEETING_RAW with(nolock)",
+      "rows": 1
+    },
+    "42": {
+      "table": "D_PROSPECT_CONFERENCE_PARTICIPANT_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_CONFERENCE_PARTICIPANT_RAW with(nolock)",
+      "rows": 1
+    },
+    "43": {
+      "table": "D_PROSPECT_COVERAGE_EMAILS",
+      "query": "select count(1) AS cnt from D_PROSPECT_COVERAGE_EMAILS with(nolock)",
+      "rows": 1
+    },
+    "44": {
+      "table": "D_PROSPECT_EVENT_ANALYST",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_ANALYST with(nolock)",
+      "rows": 1
+    },
+    "45": {
+      "table": "D_READERSHIPACC_CHART",
+      "query": "select count(1) AS cnt from D_READERSHIPACC_CHART with(nolock)",
+      "rows": 1
+    },
+    "46": {
+      "table": "D_READERSHIPDOCUMENT_CHART",
+      "query": "select count(1) AS cnt from D_READERSHIPDOCUMENT_CHART with(nolock)",
+      "rows": 1
+    },
+    "47": {
+      "table": "D_READRSHIP_DETAILED_REPORT_TBL",
+      "query": "select count(1) AS cnt from D_READRSHIP_DETAILED_REPORT_TBL with(nolock)",
+      "rows": 1
+    },
+    "48": {
+      "table": "D_ROI_ANALYST_MARKETING_RAW",
+      "query": "select count(1) AS cnt from D_ROI_ANALYST_MARKETING_RAW with(nolock)",
+      "rows": 1
+    },
+    "49": {
+      "table": "D_ROI_CON_CALL_ATTENDEE_RAW",
+      "query": "select count(1) AS cnt from D_ROI_CON_CALL_ATTENDEE_RAW with(nolock)",
+      "rows": 1
+    },
+    "50": {
+      "table": "D_ROI_CONFERENCE_MEETING_RAW",
+      "query": "select count(1) AS cnt from D_ROI_CONFERENCE_MEETING_RAW with(nolock)",
+      "rows": 1
+    },
+    "51": {
+      "table": "D_ROI_CONFERENCE_PARTICIPANT_RAW",
+      "query": "select count(1) AS cnt from D_ROI_CONFERENCE_PARTICIPANT_RAW with(nolock)",
+      "rows": 1
+    },
+    "52": {
+      "table": "D_ROI_DATATYPE",
+      "query": "select count(1) AS cnt from D_ROI_DATATYPE with(nolock)",
+      "rows": 1
+    },
+    "53": {
+      "table": "D_ROI_READERSHIP_RAW",
+      "query": "select count(1) AS cnt from D_ROI_READERSHIP_RAW with(nolock)",
+      "rows": 1
+    },
+    "54": {
+      "table": "D_SALESPERSON",
+      "query": "select count(1) AS cnt from D_SALESPERSON with(nolock)",
+      "rows": 1
+    },
+    "55": {
+      "table": "D_SALESPERSON_COVERAGE",
+      "query": "select count(1) AS cnt from D_SALESPERSON_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "56": {
+      "table": "D_SEARCH",
+      "query": "select count(1) AS cnt from D_SEARCH with(nolock)",
+      "rows": 1
+    },
+    "57": {
+      "table": "D_TICKER_DOCUMENT_READERSHIP",
+      "query": "select count(1) AS cnt from D_TICKER_DOCUMENT_READERSHIP with(nolock)",
+      "rows": 1
+    },
+    "58": {
+      "table": "D_TICKERREADERSHIP",
+      "query": "select count(1) AS cnt from D_TICKERREADERSHIP with(nolock)",
+      "rows": 1
+    },
+    "59": {
+      "table": "D_TICKERREADERSHIP_CHART",
+      "query": "select count(1) AS cnt from D_TICKERREADERSHIP_CHART with(nolock)",
+      "rows": 1
+    },
+    "60": {
+      "table": "D_USER_CLIENT_DETAILS",
+      "query": "select count(1) AS cnt from D_USER_CLIENT_DETAILS with(nolock)",
+      "rows": 1
+    },
+    "61": {
+      "table": "D_USER_METRICS",
+      "query": "select count(1) AS cnt from D_USER_METRICS with(nolock)",
+      "rows": 1
+    },
+    "62": {
+      "table": "TEMP_ANALYST",
+      "query": "select count(1) AS cnt from TEMP_ANALYST with(nolock)",
+      "rows": 1
+    },
+    "63": {
+      "table": "PT_PNL_POSITION",
+      "query": "select count(1) AS cnt from PT_PNL_POSITION with(nolock)",
+      "rows": 1
+    },
+    "64": {
+      "table": "PT_TRADING_ACCOUNTS",
+      "query": "select count(1) AS cnt from PT_TRADING_ACCOUNTS with(nolock)",
+      "rows": 1
+    },
+    "65": {
+      "table": "PT_TRADING_ACCOUNTS_COVERAGE",
+      "query": "select count(1) AS cnt from PT_TRADING_ACCOUNTS_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "66": {
+      "table": "PT_PNL_POSITION",
+      "query": "select count(1) AS cnt from PT_PNL_POSITION with(nolock)",
+      "rows": 1
+    },
+    "67": {
+      "table": "PT_REVTRADERSYMBOL",
+      "query": "select count(1) AS cnt from PT_REVTRADERSYMBOL with(nolock)",
+      "rows": 1
+    },
+    "68": {
+      "table": "PT_SECURITY_MASTER",
+      "query": "select count(1) AS cnt from PT_SECURITY_MASTER with(nolock)",
+      "rows": 1
+    },
+    "69": {
+      "table": "PT_TRADER_ANNUAL_BUDGET",
+      "query": "select count(1) AS cnt from PT_TRADER_ANNUAL_BUDGET with(nolock)",
+      "rows": 1
+    },
+    "70": {
+      "table": "PT_TRADING_ACCOUNTS",
+      "query": "select count(1) AS cnt from PT_TRADING_ACCOUNTS with(nolock)",
+      "rows": 1
+    },
+    "71": {
+      "table": "M_EXPENSES_RAW",
+      "query": "select count(1) AS cnt from M_EXPENSES_RAW with(nolock)",
+      "rows": 1
+    },
+    "72": {
+      "table": "M_COMMISSION_ATM",
+      "query": "select count(1) AS cnt from M_COMMISSION_ATM with(nolock)",
+      "rows": 1
+    }
+  },
+  "batch2": {
+    "0": {
+      "table": "D_READERSHIPACC_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART group by period_filter",
+      "rows": 4
+    },
+    "1": {
+      "table": "D_SECTORHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART group by period_filter",
+      "rows": 4
+    },
+    "2": {
+      "table": "D_READERSHIPDOCUMENT_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART group by period_filter",
+      "rows": 4
+    },
+    "3": {
+      "table": "D_DOCUMENTTYPEHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART group by period_filter",
+      "rows": 4
+    },
+    "4": {
+      "table": "D_CHANNELREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    },
+    "5": {
+      "table": "D_TICKERREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_TICKERREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    },
+    "6": {
+      "table": "D_ANALYSTREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    }
+  }
+}
