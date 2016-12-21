@@ -1,4 +1,7 @@
 <?php
+/* force UTC as default time format */
+date_default_timezone_set ("UTC");
+
 set_include_path(get_include_path() . PATH_SEPARATOR . 'plugins/phpseclib');
 include('Net/SSH2.php');
 include('Net/SFTP.php');
@@ -24,8 +27,8 @@ $source = "./assets/export/" . date('dMY') .'-COWEN-BM'. '.txt'; //trim($_REQUES
 		$output['error'] = true;
 		$output['msg'] = "sftp Login Failed...";
 	} else {
-		$output = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
-		if($output) {
+		$result = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
+		if($result) {
 			//echo "file write success";
 			$output['error'] = false;
 			$output['msg'] = "file write success...";
