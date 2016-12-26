@@ -250,5 +250,36 @@
       "query": "select count(1) AS cnt from COMMISSION_TRADING_DETAILS with(nolock)",
       "rows": 1
     }
+  },
+  "position_trader_commission_raw": {
+    "0": {
+      "table": "POSITION_TRADER_COMMISSION",
+      "query": "select count(1) AS cnt from POSITION_TRADER_COMMISSION with(nolock)",
+      "rows": 1
+    }
+  },
+  "position_trader_commission": {
+    "0": {
+      "table": "D_POSITION_TRADER_COMMISSION",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_COMMISSION with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_POSITION_TRADER_COMM_DETAILS",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_COMM_DETAILS with(nolock)",
+      "rows": 1
+    }
+  },
+  "position_trader": {
+    "0": {
+      "table": "D_POSITION_TRADER",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_POSITION_TRADER_DETAILS",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_DETAILS with(nolock)",
+      "rows": 1
+    }
   }
 }
