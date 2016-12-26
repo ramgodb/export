@@ -18,21 +18,26 @@ if(!file_exists($source)) {
 	$output['error'] = true;
 	$output['msg'] = "Source file not available...";
 } else {
-	$sftp = new Net_SFTP(BM_SFTP_HOST,22);
-	if (!$sftp->login(BM_SFTP_USER, BM_SFTP_PASS)) { 
-		$output['error'] = true;
-		$output['msg'] = "sftp Login Failed...";
-	} else {
-		$result = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
-		if($result) {
-			//echo "file write success";
-			$output['error'] = false;
-			$output['msg'] = "file write success...";
-		} else {
-			//echo "file write failed";
+	if(strtolower(APP) == 'prod') {
+		$sftp = new Net_SFTP(BM_SFTP_HOST,22);
+		if (!$sftp->login(BM_SFTP_USER, BM_SFTP_PASS)) { 
 			$output['error'] = true;
-			$output['msg'] = "file write failed...";
+			$output['msg'] = "sftp Login Failed...";
+		} else {
+			$result = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
+			if($result) {
+				//echo "file write success";
+				$output['error'] = false;
+				$output['msg'] = "file write success...";
+			} else {
+				//echo "file write failed";
+				$output['error'] = true;
+				$output['msg'] = "file write failed...";
+			}
 		}
+	} else {
+		$output['error'] = false;
+		$output['msg'] = "file write success...";
 	}
 }
 echo json_encode($output);

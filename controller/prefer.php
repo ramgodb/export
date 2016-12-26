@@ -15,15 +15,16 @@ class controlPrefer extends modelPrefer
 	
 	public function test()
 	{
+		echo "test";exit;
 		/*$file = $this->path . date('dMY') .'-COWEN-BM'. '.txt';
 		$fileInfoNew = $this->getFileDetails($file);
 		echo "<pre>";print_r($fileInfoNew);echo "</pre>";exit;*/
 		//$file = date('dMY') .'-COWEN-BM'. '.txt';
-		if($this->sendFile()) {
+		/*if($this->sendFile()) {
 			echo "file write success...";
 		} else {
 			echo "file write failed...";
-		}
+		}*/
 		/* $bodyArray = $this->preferData();
 		echo "<pre>";		
 		print_r($bodyArray);
