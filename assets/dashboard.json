@@ -1,56 +1,254 @@
 {
-  "batch1": {
+  "account_copy": {
     "0": {
+      "table": "COMMISION_ACCOUNT",
+      "query": "select count(1) AS cnt from COMMISION_ACCOUNT with(nolock)",
+      "rows": 1
+    }
+  },
+  "ticker_copy": {
+    "0": {
+      "table": "COMMISION_TICKER",
+      "query": "select count(1) AS cnt from COMMISION_TICKER with(nolock)",
+      "rows": 1
+    },
+  "research_commision": {
+    "0": {
+      "table": "M_PARAM",
+      "query": "select count(1) AS cnt from M_PARAM with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_COMMISSIONS_ACCOUNT",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_COMISSION_ACCOUNT_REGION",
+      "query": "select count(1) AS cnt from D_COMISSION_ACCOUNT_REGION with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_COMMISSION_TICKER",
+      "query": "select count(1) AS cnt from D_COMMISSION_TICKER with(nolock)",
+      "rows": 1
+    },
+    "4": {
+      "table": "D_SALES_CLIENT_SUMMARY",
+      "query": "select count(1) AS cnt from D_SALES_CLIENT_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "5": {
+      "table": "D_USER_CLIENT_DETAILS",
+      "query": "select count(1) AS cnt from D_USER_CLIENT_DETAILS with(nolock)",
+      "rows": 1
+    },
+    "6": {
+      "table": "D_COMMISSIONS_SECTOR",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_SECTOR with(nolock)",
+      "rows": 1
+    },
+    "7": {
+      "table": "D_COMMISSIONS_ACCOUNT_TICKER",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_TICKER with(nolock)",
+      "rows": 1
+    },
+    "8": {
+      "table": "D_CLIENT_COMMISSION_HIST_DATA",
+      "query": "select count(1) AS cnt from D_CLIENT_COMMISSION_HIST_DATA with(nolock)",
+      "rows": 1
+    },
+    "9": {
+      "table": "D_COMMISSIONS_ACCOUNT_SECTOR",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_SECTOR with(nolock)",
+      "rows": 1
+    }
+  },
+  "roi_calc": {
+    "0": {
+      "table": "D_ROI_NEW",
+      "query": "select count(1) AS cnt from D_ROI_NEW with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_CLIENT_DASH",
+      "query": "select count(1) AS cnt from D_CLIENT_DASH with(nolock)",
+      "rows": 1
+    }
+  },
+  "sales_commision": {
+    "0": {
+      "table": "D_COMMISSIONS_ACCOUNT_PREV",
+      "query": "select count(1) AS cnt from D_COMMISSIONS_ACCOUNT_PREV with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_USER_CLIENT_DETAILS_HIST",
+      "query": "select count(1) AS cnt from D_USER_CLIENT_DETAILS_HIST with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_CLIENT_COMMISSION_HIST",
+      "query": "select count(1) AS cnt from D_CLIENT_COMMISSION_HIST with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_CLIENT_COMMISSION_HIST_DATA",
+      "query": "select count(1) AS cnt from D_CLIENT_COMMISSION_HIST_DATA with(nolock)",
+      "rows": 1
+    }
+  },
+  "client": {
+    "0": {
+      "table": "M_EXPENSES",
+      "query": "select count(1) AS cnt from M_EXPENSES with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_EXPENSE_SUMMARY",
+      "query": "select count(1) AS cnt from D_EXPENSE_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_CLIENT_MARKETING",
+      "query": "select count(1) AS cnt from D_CLIENT_MARKETING with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_BULLETIN",
+      "query": "select count(1) AS cnt from D_BULLETIN with(nolock)",
+      "rows": 1
+    },
+    "4": {
+      "table": "D_CLIENT_COVERAGE",
+      "query": "select count(1) AS cnt from D_CLIENT_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "5": {
+      "table": "D_CLIENT_PROSPECT_COVERAGE",
+      "query": "select count(1) AS cnt from D_CLIENT_PROSPECT_COVERAGE with(nolock)",
+      "rows": 1
+    },
+    "6": {
+      "table": "D_ACCOUNT_SALES",
+      "query": "select count(1) AS cnt from D_ACCOUNT_SALES with(nolock)",
+      "rows": 1
+    },
+    "7": {
       "table": "D_ACCOUNT_COVERAGE_EMAILS",
       "query": "select count(1) AS cnt from D_ACCOUNT_COVERAGE_EMAILS with(nolock)",
       "rows": 1
     },
-    "1": {
-      "table": "D_ACCOUNT_CVG",
-      "query": "select count(1) AS cnt from D_ACCOUNT_CVG with(nolock)",
+    "8": {
+      "table": "D_PROSPECT_COVERAGE_EMAILS",
+      "query": "select count(1) AS cnt from D_PROSPECT_COVERAGE_EMAILS with(nolock)",
       "rows": 1
     },
-    "2": {
-      "table": "D_ACCOUNT_READERSHIP",
-      "query": "select count(1) AS cnt from D_ACCOUNT_READERSHIP with(nolock)",
+    "9": {
+      "table": "D_CLIENT_INTERACTION",
+      "query": "select count(1) AS cnt from D_CLIENT_INTERACTION with(nolock)",
+      "rows": 1
+    },
+    "10": {
+      "table": "D_CLIENT_INTERACTION_HISTORY",
+      "query": "select count(1) AS cnt from D_CLIENT_INTERACTION_HISTORY with(nolock)",
+      "rows": 1
+    },
+    "11": {
+      "table": "D_CLIENT_COMMISSION_HIST",
+      "query": "select count(1) AS cnt from D_CLIENT_COMMISSION_HIST with(nolock)",
       "rows": 1
     }
   },
-  "batch2": {
+  "ticker": {
     "0": {
-      "table": "D_READERSHIPACC_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART group by period_filter",
-      "rows": 4
+      "table": "d_ticker_trading",
+      "query": "select count(1) AS cnt from d_ticker_trading with(nolock)",
+      "rows": 1
     },
     "1": {
-      "table": "D_SECTORHITS_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART group by period_filter",
-      "rows": 4
+      "table": "D_TICKER_HOLDING",
+      "query": "select count(1) AS cnt from D_TICKER_HOLDING with(nolock)",
+      "rows": 1
     },
     "2": {
-      "table": "D_READERSHIPDOCUMENT_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART group by period_filter",
-      "rows": 4
+      "table": "d_ticker_clients",
+      "query": "select count(1) AS cnt from d_ticker_clients with(nolock)",
+      "rows": 1
     },
     "3": {
-      "table": "D_DOCUMENTTYPEHITS_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART group by period_filter",
-      "rows": 4
+      "table": "D_TICKER_EVENTS",
+      "query": "select count(1) AS cnt from D_TICKER_EVENTS with(nolock)",
+      "rows": 1
     },
     "4": {
-      "table": "D_CHANNELREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART group by period_filter",
-      "rows": 4
+      "table": "D_TICKER_INFO",
+      "query": "select count(1) AS cnt from D_TICKER_INFO with(nolock)",
+      "rows": 1
     },
     "5": {
-      "table": "D_TICKERREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_TICKERREADERSHIP_CHART group by period_filter",
-      "rows": 4
+      "table": "d_ticker_marketing",
+      "query": "select count(1) AS cnt from d_ticker_marketing with(nolock)",
+      "rows": 1
     },
     "6": {
-      "table": "D_ANALYSTREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART group by period_filter",
-      "rows": 4
+      "table": "TEMP_TICKER_ACTIVITY_HISTORY",
+      "query": "select count(1) AS cnt from TEMP_TICKER_ACTIVITY_HISTORY with(nolock)",
+      "rows": 1
+    },
+    "7": {
+      "table": "D_TICKER_ACTIVITY_HISTORY",
+      "query": "select count(1) AS cnt from D_TICKER_ACTIVITY_HISTORY with(nolock)",
+      "rows": 1
+    },
+    "8": {
+      "table": "D_TICKER_HOLDINGS_DETAILS",
+      "query": "select count(1) AS cnt from D_TICKER_HOLDINGS_DETAILS with(nolock)",
+      "rows": 1
+    },
+    "9": {
+      "table": "D_CLIENT_SECTOR",
+      "query": "select count(1) AS cnt from D_CLIENT_SECTOR with(nolock)",
+      "rows": 1
+    }
+  },
+  "mkt_calendar": {
+    "0": {
+      "table": "D_CALENDAR_ALL_EVENTS",
+      "query": "select count(1) AS cnt from D_CALENDAR_ALL_EVENTS with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_CALENDAR_EVENT_DATA",
+      "query": "select count(1) AS cnt from D_CALENDAR_EVENT_DATA with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_CALENDAR_EVENT_MEETINGS",
+      "query": "select count(1) AS cnt from D_CALENDAR_EVENT_MEETINGS with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_CALENDAR_MEETING_ATTENDEES",
+      "query": "select count(1) AS cnt from D_CALENDAR_MEETING_ATTENDEES with(nolock)",
+      "rows": 1
+    },
+    "4": {
+      "table": "D_ANALYST_FOCUSSED_TEMP",
+      "query": "select count(1) AS cnt from D_ANALYST_FOCUSSED_TEMP with(nolock)",
+      "rows": 1
+    }
+  },
+  "position_trader_raw": {
+    "0": {
+      "table": "COMMISSION_TRADING",
+      "query": "select count(1) AS cnt from COMMISSION_TRADING with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "COMMISSION_TRADING_DETAILS",
+      "query": "select count(1) AS cnt from COMMISSION_TRADING_DETAILS with(nolock)",
+      "rows": 1
     }
   }
 }
