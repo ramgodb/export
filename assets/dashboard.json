@@ -11,7 +11,8 @@
       "table": "COMMISION_TICKER",
       "query": "select count(1) AS cnt from COMMISION_TICKER with(nolock)",
       "rows": 1
-    },
+    }
+  },
   "research_commision": {
     "0": {
       "table": "M_PARAM",
