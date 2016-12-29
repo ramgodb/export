@@ -1,12 +1,15 @@
 account.bat
-===========
-	-ACCOUNT_COPY
+***********
+	-php index.php compare dashboard account_copy
+	-ACCOUNT_COPY == account_copy
 		COMMISION_ACCOUNT
 
-	-TICKER_COPY
+	-php index.php compare dashboard ticker_copy
+	-TICKER_COPY == ticker_copy
 		COMMISION_TICKER
 
-	-P_GEN_RESEARCH_COMMISSION_DATA
+	-php index.php compare dashboard research_commision
+	-P_GEN_RESEARCH_COMMISSION_DATA == research_commision
 		M_PARAM
 		D_COMMISSIONS_ACCOUNT
 		D_COMISSION_ACCOUNT_REGION
@@ -18,18 +21,20 @@ account.bat
 		D_CLIENT_COMMISSION_HIST_DATA
 		D_COMMISSIONS_ACCOUNT_SECTOR
 
-	-P_GEN_ROI_CALC_DATA
+	-php index.php compare dashboard roi_calc
+	-P_GEN_ROI_CALC_DATA == roi_calc
 		D_ROI_NEW
 		D_CLIENT_DASH
 
-
-	-P_GEN_SALES_COMMISSION_DATA
+	-php index.php compare dashboard sales_commision
+	-P_GEN_SALES_COMMISSION_DATA == sales_commision
 		D_COMMISSIONS_ACCOUNT_PREV
 		D_USER_CLIENT_DETAILS_HIST
 		D_CLIENT_COMMISSION_HIST
 		D_CLIENT_COMMISSION_HIST_DATA
 
-	-P_GEN_CLIENT_DATA
+	-php index.php compare dashboard client
+	-P_GEN_CLIENT_DATA == client
 		M_EXPENSES
 		D_EXPENSE_SUMMARY
 		D_CLIENT_MARKETING
@@ -43,7 +48,8 @@ account.bat
 		D_CLIENT_INTERACTION_HISTORY
 		D_CLIENT_COMMISSION_HIST
 
-	-P_GEN_TICKER_DATA
+	-php index.php compare dashboard ticker
+	-P_GEN_TICKER_DATA == ticker
 		d_ticker_trading
 		D_TICKER_HOLDING
 		d_ticker_clients
@@ -55,36 +61,43 @@ account.bat
 		D_TICKER_HOLDINGS_DETAILS
 		D_CLIENT_SECTOR
 
-	-P_GEN_MKT_CALENDAR_DATA
+	-php index.php compare dashboard mkt_calendar
+	-P_GEN_MKT_CALENDAR_DATA == mkt_calendar
 		D_CALENDAR_ALL_EVENTS
 		D_CALENDAR_EVENT_DATA
 		D_CALENDAR_EVENT_MEETINGS
 		D_CALENDAR_MEETING_ATTENDEES
 		D_ANALYST_FOCUSSED_TEMP
 
-	-P_GEN_POSITION_TRADER_RAW_DATA
+	-php index.php compare dashboard position_trader_raw
+	-P_GEN_POSITION_TRADER_RAW_DATA == position_trader_raw
 		COMMISSION_TRADING
 		COMMISSION_TRADING_DETAILS
 
-	-P_GEN_POSITION_TRADER_COMMISSION_RAW_DATA
+	-php index.php compare dashboard position_trader_commission_raw
+	-P_GEN_POSITION_TRADER_COMMISSION_RAW_DATA == position_trader_commission_raw
 		POSITION_TRADER_COMMISSION
 
-	-P_GEN_POSITION_TRADER_COMMISSION_DATA
+	-php index.php compare dashboard position_trader_commission
+	-P_GEN_POSITION_TRADER_COMMISSION_DATA == position_trader_commission
 		D_POSITION_TRADER_COMMISSION
 		D_POSITION_TRADER_COMM_DETAILS
 
-	-P_GEN_POSITION_TRADER_DATA
+	-php index.php compare dashboard position_trader
+	-P_GEN_POSITION_TRADER_DATA == position_trader
 		D_POSITION_TRADER
 		D_POSITION_TRADER_DETAILS
 
-	-P_GEN_TRADER_SUMMARY_DATA
+	-php index.php compare dashboard position_trader_summary
+	-P_GEN_TRADER_SUMMARY_DATA == position_trader_summary
 		D_POSITION_TRADER_SUMMARY_DETAILS
 		D_POSITION_TRADER_SUMMARY
 		D_TRADER_SUMMARY
 
-procedure.bat
-=============
-	-P_GEN_ROI_RAW_DATA
+procedures.bat
+*************
+	-php index.php compare dashboard roi_raw
+#	-P_GEN_ROI_RAW_DATA == roi_raw
 		D_ROI_ANALYST_MARKETING_RAW
 		D_ROI_ANALYST_MARKETING_PARTICIPANT
 		D_ROI_INTERACTION_RAW
@@ -117,7 +130,8 @@ procedure.bat
 		D_POS_TRADER_MASTER
 		D_TICKER_DOCUMENT_READERSHIP
 
-	-P_GEN_RESEARCH_COMMON_DATA
+	-php index.php compare dashboard research_common
+	-P_GEN_RESEARCH_COMMON_DATA == research_common
 		D_ANALYST_INFO
 		D_ACCOUNT_TYPE_MASTER
 		D_PARENT_ACCOUNT_COVERAGE
@@ -139,7 +153,8 @@ procedure.bat
 		M_FIRM_EMPLOYEES
 		D_ANALYST_TICKER
 
-	-P_GEN_CONTACT_DATA
+	-php index.php compare dashboard contact
+	-P_GEN_CONTACT_DATA == contact
 		D_CONTACT
 		D_TOUCH_POINT_ANALYST
 		D_CONTACT_INTEREST
@@ -152,7 +167,8 @@ procedure.bat
 		D_COMMUNICATION_LOG
 		D_CONTACT_INTERACTION
 
-	-P_GEN_RESEARCH_ANALYST_DATA
+	-php index.php compare dashboard reserch_analyst
+	-P_GEN_RESEARCH_ANALYST_DATA == reserch_analyst
 		D_USER_METRICS
 		D_INTERACTION_BREAKUP
 		D_INTERACTION_BREAKUP_AHEAD
@@ -170,7 +186,8 @@ procedure.bat
 		D_CALENDAR_EVENT
 		D_CONTACT_EVENT
 
-	-P_GEN_RESEARCH_MANAGER_DATA
+	-php index.php compare dashboard research_manager
+	-P_GEN_RESEARCH_MANAGER_DATA == research_manager
 		D_USER_METRICS
 		D_INTERACTION_MG_BREAKUP
 		D_INTERACTION_MG_LIST
@@ -179,16 +196,36 @@ procedure.bat
 		D_BULLETIN
 		D_ANALYST_FALLING
 
-	-P_GEN_SALES_MANAGER_DATA
+	-php index.php compare dashboard sales_manager
+	-P_GEN_SALES_MANAGER_DATA == sales_manager
 		D_BULLETIN
 		D_SALESPERSON_COVERAGE
 		D_CLIENT_ACTIVITY_HISTORY
 
-	-P_GEN_SALES_PERSON_DATA
+	-php index.php compare dashboard sales_person
+	-P_GEN_SALES_PERSON_DATA == sales_person
 		D_ALERTS
 		D_USER_ALERTS
 
-	-P_GEN_PREFERENCE_CONTACT
+	-php index.php compare dashboard prospect_raw
+	-P_GEN_PROSPECT_RAW_DATA == prospect_raw
+		D_PROSPECT_ANALYST_MARKETING_RAW
+		D_PROSPECT_ANALYST_MARKETING_PARTICIPANT
+		D_PROSPECT_INTERACTION_RAW
+		D_PROSPECT_EVENT_MEETING_ATTENDEE
+		D_PROSPECT_EVENT_MEETING_PRESENTER
+		D_PROSPECT_EVENT_MEETING_ATTENDEE_RAW
+		D_PROSPECT_EVENT_TICKER
+		D_PROSPECT_MEETING_ANALYST
+		D_PROSPECT_EVENT_ANALYST
+		D_PROSPECT_CONFERENCE_MEETING_RAW
+		D_PROSPECT_CONFERENCE_PARTICIPANT_RAW
+		D_PROSPECT_CLIENT_RESOURCE_ALLOCATION
+		D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_CHART
+		D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_SUMMARY
+
+	-php index.php compare dashboard preference_contact
+#	-P_GEN_PREFERENCE_CONTACT == preference_contact
 		D_PREFERENCE_CONTACT
 		D_LIST_TYPES
 		D_SEARCH_LIST_ANALYST
@@ -198,8 +235,8 @@ procedure.bat
 		D_SEARCH_LIST_DOCUMENT
 		D_COMMUNICATE_SEARCH_HOLDING
 
-
-	-P_GEN_USER_STATS
+	-php index.php compare dashboard user_stats
+#	-P_GEN_USER_STATS == user_stats
 		D_MOVING_USAGE
 		T_STATS_YTD
 		T_STATS_WTD
@@ -213,20 +250,25 @@ procedure.bat
 		T_STATS_CALL_STATUS
 
 atm.bat
-=======
-	-P_GEN_ATM_LOSS_DATA
+*******
+	-php index.php compare dashboard atm_loss_data
+	-P_GEN_ATM_LOSS_DATA == atm_loss_data
 		M_UNALLOCATED_LOSS
 		M_COMMISSION_ATM
 
 
 P_COMMUNICATE_SEARCH_HOLDING.bat
-	-P_GEN_COMMUNICATE_HOLDINGS_DATA_1
+********************************
+	-php index.php compare dashboard communicate_holding_data1
+	-P_GEN_COMMUNICATE_HOLDINGS_DATA_1 == communicate_holding_data1
 		D_COMMUNICATE_SEARCH_HOLDING_1
 
 	-P_GEN_COMMUNICATE_HOLDINGS_DATA_2
 		D_COMMUNICATE_SEARCH_HOLDING_1 -- creating index only
 
 13f.bat
-	-P_GEN_COMMUNICATE_SEARCH_DAILY_2
+*******
+	-php index.php compare dashboard communicate_search_daily2
+	-P_GEN_COMMUNICATE_SEARCH_DAILY_2 == communicate_search_daily2
 		D_COMMUNICATE_SEARCH_HOLDING
 		

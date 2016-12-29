@@ -300,70 +300,6 @@
       "rows": 1
     }
   },
-  "analystreadership": {
-    "0": {
-      "table": "D_ANALYSTREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "chennelreadership": {
-    "0": {
-      "table": "D_CHANNELREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "documenttypehits": {
-    "0": {
-      "table": "D_DOCUMENTTYPEHITS_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "readershipaccount": {
-    "0": {
-      "table": "D_READERSHIPACC_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "readershipdocument": {
-    "0": {
-      "table": "D_READERSHIPDOCUMENT_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "sectorhits": {
-    "0": {
-      "table": "D_SECTORHITS_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART group by period_filter",
-      "rows": 4
-    }
-  },
-  "tickerreadership": {
-    "0": {
-      "table": "D_TICKERREADERSHIP_CHART",
-      "query": "select (period_filter),count(period_filter) AS cnt from D_TICKERREADERSHIP_CHART group by period_filter",
-      "rows": 4
-    },
-    "1": {
-      "table": "D_POSITION_TRADER_SUMMARY_DETAILS",
-      "query": "select count(1) AS cnt from D_POSITION_TRADER_SUMMARY_DETAILS with(nolock)",
-      "rows": 1
-    },
-    "2": {
-      "table": "D_POSITION_TRADER_SUMMARY",
-      "query": "select count(1) AS cnt from D_POSITION_TRADER_SUMMARY with(nolock)",
-      "rows": 1
-    },
-    "3": {
-      "table": "D_TRADER_SUMMARY",
-      "query": "select count(1) AS cnt from D_TRADER_SUMMARY with(nolock)",
-      "rows": 1
-    }
-  },
   "roi_raw": {
     "0": {
       "table": "D_ROI_ANALYST_MARKETING_RAW",
@@ -824,6 +760,78 @@
       "rows": 1
     }
   },
+  "prospect_raw": {
+    "0": {
+      "table": "D_PROSPECT_ANALYST_MARKETING_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_ANALYST_MARKETING_RAW with(nolock)",
+      "rows": 1
+    },
+    "1": {
+      "table": "D_PROSPECT_ANALYST_MARKETING_PARTICIPANT",
+      "query": "select count(1) AS cnt from D_PROSPECT_ANALYST_MARKETING_PARTICIPANT with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_PROSPECT_INTERACTION_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_INTERACTION_RAW with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_PROSPECT_EVENT_MEETING_ATTENDEE",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_MEETING_ATTENDEE with(nolock)",
+      "rows": 1
+    },
+    "4": {
+      "table": "D_PROSPECT_EVENT_MEETING_PRESENTER",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_MEETING_PRESENTER with(nolock)",
+      "rows": 1
+    },
+    "5": {
+      "table": "D_PROSPECT_EVENT_MEETING_ATTENDEE_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_MEETING_ATTENDEE_RAW with(nolock)",
+      "rows": 1
+    },
+    "6": {
+      "table": "D_PROSPECT_EVENT_TICKER",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_TICKER with(nolock)",
+      "rows": 1
+    },
+    "7": {
+      "table": "D_PROSPECT_MEETING_ANALYST",
+      "query": "select count(1) AS cnt from D_PROSPECT_MEETING_ANALYST with(nolock)",
+      "rows": 1
+    },
+    "8": {
+      "table": "D_PROSPECT_EVENT_ANALYST",
+      "query": "select count(1) AS cnt from D_PROSPECT_EVENT_ANALYST with(nolock)",
+      "rows": 1
+    },
+    "9": {
+      "table": "D_PROSPECT_CONFERENCE_MEETING_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_CONFERENCE_MEETING_RAW with(nolock)",
+      "rows": 1
+    },
+    "10": {
+      "table": "D_PROSPECT_CONFERENCE_PARTICIPANT_RAW",
+      "query": "select count(1) AS cnt from D_PROSPECT_CONFERENCE_PARTICIPANT_RAW with(nolock)",
+      "rows": 1
+    },
+    "11": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION with(nolock)",
+      "rows": 1
+    },
+    "12": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_CHART",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_CHART with(nolock)",
+      "rows": 1
+    },
+    "13": {
+      "table": "D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_SUMMARY",
+      "query": "select count(1) AS cnt from D_PROSPECT_CLIENT_RESOURCE_ALLOCATION_SUMMARY with(nolock)",
+      "rows": 1
+    }
+  },
   "preference_contact": {
     "0": {
       "table": "D_PREFERENCE_CONTACT",
@@ -954,7 +962,70 @@
       "rows": 1
     }
   },
-
+  "analystreadership": {
+    "0": {
+      "table": "D_ANALYSTREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "chennelreadership": {
+    "0": {
+      "table": "D_CHANNELREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "documenttypehits": {
+    "0": {
+      "table": "D_DOCUMENTTYPEHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "readershipaccount": {
+    "0": {
+      "table": "D_READERSHIPACC_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "readershipdocument": {
+    "0": {
+      "table": "D_READERSHIPDOCUMENT_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "sectorhits": {
+    "0": {
+      "table": "D_SECTORHITS_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART group by period_filter",
+      "rows": 4
+    }
+  },
+  "tickerreadership": {
+    "0": {
+      "table": "D_TICKERREADERSHIP_CHART",
+      "query": "select (period_filter),count(period_filter) AS cnt from D_TICKERREADERSHIP_CHART group by period_filter",
+      "rows": 4
+    },
+    "1": {
+      "table": "D_POSITION_TRADER_SUMMARY_DETAILS",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_SUMMARY_DETAILS with(nolock)",
+      "rows": 1
+    },
+    "2": {
+      "table": "D_POSITION_TRADER_SUMMARY",
+      "query": "select count(1) AS cnt from D_POSITION_TRADER_SUMMARY with(nolock)",
+      "rows": 1
+    },
+    "3": {
+      "table": "D_TRADER_SUMMARY",
+      "query": "select count(1) AS cnt from D_TRADER_SUMMARY with(nolock)",
+      "rows": 1
+    }
+  },
 
 
   "batch1-------------": {
