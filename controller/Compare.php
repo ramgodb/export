@@ -143,7 +143,7 @@ class controlCompare extends modelCompare
 		$failStyle = 'style="background-color:#B77676;"';
 		foreach($batch as $list) {
 			list($count, $row) = $this->dashQuery($list->query, $list->table);
-			if(((is_numeric($count[1]) AND $count[1] > 0) OR ($count[1] != '')) AND $list->rows == $row) {
+			if(((is_numeric($count[1]) AND $count[1] > 0) OR (!is_numeric($count[1]) AND $count[1] != '')) AND $list->rows == $row) {
 				$msg .= "<tr $passStyle><td>".$c."</td><td>".$list->table."</td><td>".$count[0]."</td><td>".$count[1]."</td><td>Pass</td></tr>";
 			} else {
 				$status = false;
