@@ -37,32 +37,36 @@ class modelPrefer extends libDatabase
 			if(!isset($tmp1[$mapp['bmType_id']])) {
 				$tmp1[] = $mapp['bmType_id'];
 			}
-			$tmp[$mapp['report_id'] = $tmp1;
+			$tmp[$mapp['report_id']] = $tmp1;
 			$mappingData[$mapp['cate_type_name']] = $tmp;
 			unset($tmp);unset($tmp1);
 		}
-		print_r($mappingData);exit;
+		unset($mappRow);
+		//print_r($mappingData);exit;
 		//changes in query
 		//p.cate_type_id = p.bm_id
 		
 		//changes in query
 		//pd.doc_type_id = pd.bm_Typeid
-		$sql1 = "SELECT 
+		/*$sql1 = "SELECT 
 				p.contact_id, pd.bm_Typeid as doc_id
 					FROM T_PM_PREFERENCE AS p 
 					INNER JOIN T_PM_PREFERENCE_DETAILS AS pd 
 						ON (p.id = pd.pref_id) 
-							WHERE pd.status = 1";
+							WHERE pd.status = 1";*/
+		$sql1 = "SELECT contact_id, report_id, cate_type_name, cate_type_id FROM T_PM_PREFERENCE_DETAILS WHERE status = 1";
 		$qry1Res = $this->fetch_assoc($sql1);
 		unset($sql1);
 		$docs = array();
-		foreach ($qry1Res as $key => $value) {
+		foreach ($qry1Res as $value) {
+			$docids = (isset($mappingData[$value['cate_type_name']][$value['report_id']]) ? $mappingData[$value['cate_type_name']][$value['report_id']] : array());
 			if(isset($docs[$value['contact_id']])) {
-				$docs[$value['contact_id']]['doc'] .= ','.$value['doc_id'];
+				$docs[$value['contact_id']]['doc'] .= ','.implode(',',$docids);
 			} else {
-				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => $value['doc_id']);
+				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => implode(',',$docids));
 			}
 		}
+		unset($mappingData);
 		unset($qry1Res);
 		fwrite(STDERR, "Doc type gathered...\r\n");
 		
