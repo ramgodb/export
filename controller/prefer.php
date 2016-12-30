@@ -259,15 +259,16 @@ return true;
 		foreach ($bodyArray as $key => $valArray) {
 			$temp = array();
 			$temp[] = '"'.$valArray['id'].'"';
-			if($valArray['name'] != '') {
-				$name = explode('--',$valArray['name']);
-				$temp[] = '"'.(isset($name[0]) ? $name[0] : '').'"';
-				$temp[] = '"'.(isset($name[1]) ? $name[1] : '').'"';
+			if($valArray['sfcname'] != '') {
+				$sfcname = explode('--',$valArray['sfcname']);
+				$temp[] = '"'.(isset($sfcname[0]) ? $sfcname[0] : '').'"';
+				$temp[] = '"'.(isset($sfcname[1]) ? $sfcname[1] : '').'"';
+				$temp[] = '"'.(isset($sfcname[2]) ? $sfcname[2] : '').'"';
 			} else {
 				$temp[] = '""';
 				$temp[] = '""';
+				$temp[] = '""';
 			}
-			$temp[] = '"'.$valArray['email'].'"';
 			$temp[] = '"'.$valArray['institution'].'"';
 			$temp[] = '"254"';
 			$temp[] = '"AU:'.$valArray['AU'].';CO:'.$valArray['CO'].';IN:'.$valArray['IN'].';EL:'.$valArray['EL'].';"';

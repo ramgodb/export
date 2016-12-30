@@ -19,11 +19,32 @@ class modelPrefer extends libDatabase
 		//SELECT * FROM D_CONTACT_LIST_DETAIL 
 		//SELECT (FirstName + '-' + LastName) AS FullName, * FROM dv_sf_contact WHERE Id = '0033000000MvmnbAAB'
 		//SELECT * FROM T_CONTACT_CREDENTIAL
+		//SELECT * FROM M_PM_DOC_MAPPING
 
+		$mappQry = "SELECT cate_type_name, report_id, bmType_id FROM M_PM_DOC_MAPPING";
+		$mappRow = $this->fetch_assoc($mappQry);
+		unset($mappQry);
+		$mappingData = array();
+		foreach($mappRow as $mapp) {
+			if(!isset($mappingData[$mapp['cate_type_name']])) {
+				$mappingData[$mapp['cate_type_name']] = array();
+			} 
+			$tmp = $mappingData[$mapp['cate_type_name']];
+			if(!isset($tmp[$mapp['report_id']])) {
+				$tmp[$mapp['report_id']] = array();
+			}
+			$tmp1 = $tmp[$mapp['report_id']];
+			if(!isset($tmp1[$mapp['bmType_id']])) {
+				$tmp1[] = $mapp['bmType_id'];
+			}
+			$tmp[$mapp['report_id'] = $tmp1;
+			$mappingData[$mapp['cate_type_name']] = $tmp;
+			unset($tmp);unset($tmp1);
+		}
+		print_r($mappingData);exit;
 		//changes in query
 		//p.cate_type_id = p.bm_id
 		
-
 		//changes in query
 		//pd.doc_type_id = pd.bm_Typeid
 		$sql1 = "SELECT 
@@ -43,19 +64,18 @@ class modelPrefer extends libDatabase
 			}
 		}
 		unset($qry1Res);
-		fwrite(STDERR, "Doc type gathered gathered...\r\n");
+		fwrite(STDERR, "Doc type gathered...\r\n");
 		
 		$sql = "SELECT 
 			p.contact_id AS id, 
-			p.contact_email AS email, 
 			p.account_name AS institution, 
 			p.cate_type_name AS subs_name, 
 			p.bm_id AS subs_id, 
 			p.status AS active, 
 			(SELECT 
-				(sfc.FirstName + '--' + sfc.LastName) 
+				(sfc.FirstName + '--' + sfc.LastName + '--' + sfc.Email) 
 				FROM dv_sf_contact AS sfc 
-					WHERE sfc.Id = p.contact_id) AS name, 
+					WHERE sfc.Id = p.contact_id) AS sfcname, 
 			(SELECT 
 				(cc.username + '--' + cc.password) 
 				FROM T_CONTACT_CREDENTIAL AS cc 
