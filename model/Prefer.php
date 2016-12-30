@@ -54,16 +54,18 @@ class modelPrefer extends libDatabase
 					INNER JOIN T_PM_PREFERENCE_DETAILS AS pd 
 						ON (p.id = pd.pref_id) 
 							WHERE pd.status = 1";*/
-		$sql1 = "SELECT contact_id, report_id, cate_type_name, cate_type_id FROM T_PM_PREFERENCE_DETAILS WHERE status = 1";
+		$sql1 = "SELECT contact_id, report_id, cate_type_name, cate_type_id, report_name FROM T_PM_PREFERENCE_DETAILS WHERE status = 1";
 		$qry1Res = $this->fetch_assoc($sql1);
 		unset($sql1);
 		$docs = array();
 		foreach ($qry1Res as $value) {
 			$docids = (isset($mappingData[$value['cate_type_name']][$value['report_id']]) ? $mappingData[$value['cate_type_name']][$value['report_id']] : array());
+			$prod = (($value['report_name'] == 'Ahead of the Curve') ? 2 : 0);
 			if(isset($docs[$value['contact_id']])) {
 				$docs[$value['contact_id']]['doc'] .= ','.implode(',',$docids);
+				$docs[$value['contact_id']]['product'] = $prod;
 			} else {
-				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => implode(',',$docids));
+				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => implode(',',$docids), 'product' => $prod);
 			}
 		}
 		unset($mappingData);
@@ -94,7 +96,7 @@ class modelPrefer extends libDatabase
 			foreach ($qryRes as $res) {
 				if(isset($resArray[$res['id']])) {
 					// Subscription value update
-					if($res['subs_id'] != '') {
+					if($res['subs_id'] != '' AND $res['subs_name'] != 'product') {
 						$subs = $resArray[$res['id']][$this->subscription[$res['subs_name']]];
 						if($subs == '') {
 							$tempRes = explode(',',$res['subs_id']);
@@ -104,6 +106,12 @@ class modelPrefer extends libDatabase
 							$tempRes = array_unique(array_merge($temp, $temp1));
 						}
 						$resArray[$res['id']][$this->subscription[$res['subs_name']]] = implode(',', $tempRes);
+					} elseif($res['subs_name'] != 'product') {
+						if($docs[$res['id']]['product'] > 0) {
+							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 2;
+						} else {
+							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 0;
+						}
 					}
 				} else {
 					$res['AU'] = '';
