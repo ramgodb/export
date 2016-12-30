@@ -21,7 +21,7 @@ class modelPrefer extends libDatabase
 		//SELECT * FROM T_CONTACT_CREDENTIAL
 		//SELECT * FROM M_PM_DOC_MAPPING
 
-		$mappQry = "SELECT cate_type_name, report_id, bmType_id FROM M_PM_DOC_MAPPING";
+		$mappQry = "SELECT cate_type_name, report_id, bmType_id, report_name FROM M_PM_DOC_MAPPING";
 		$mappRow = $this->fetch_assoc($mappQry);
 		unset($mappQry);
 		$mappingData = array();
@@ -34,7 +34,7 @@ class modelPrefer extends libDatabase
 				$tmp[$mapp['report_id']] = array();
 			}
 			$tmp1 = $tmp[$mapp['report_id']];
-			if(!isset($tmp1[$mapp['bmType_id']])) {
+			if(!isset($tmp1[$mapp['bmType_id']]) AND $mapp['report_name'] != 'Ahead of the Curve') {
 				$tmp1[] = $mapp['bmType_id'];
 			}
 			$tmp[$mapp['report_id']] = $tmp1;
