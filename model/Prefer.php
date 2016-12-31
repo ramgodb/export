@@ -19,43 +19,69 @@ class modelPrefer extends libDatabase
 		//SELECT * FROM D_CONTACT_LIST_DETAIL 
 		//SELECT (FirstName + '-' + LastName) AS FullName, * FROM dv_sf_contact WHERE Id = '0033000000MvmnbAAB'
 		//SELECT * FROM T_CONTACT_CREDENTIAL
+		//SELECT * FROM M_PM_DOC_MAPPING
 
+		$mappQry = "SELECT cate_type_name, report_id, bmType_id, report_name FROM M_PM_DOC_MAPPING";
+		$mappRow = $this->fetch_assoc($mappQry);
+		unset($mappQry);
+		$mappingData = array();
+		foreach($mappRow as $mapp) {
+			if(!isset($mappingData[$mapp['cate_type_name']])) {
+				$mappingData[$mapp['cate_type_name']] = array();
+			} 
+			$tmp = $mappingData[$mapp['cate_type_name']];
+			if(!isset($tmp[$mapp['report_id']])) {
+				$tmp[$mapp['report_id']] = array();
+			}
+			$tmp1 = $tmp[$mapp['report_id']];
+			if(!isset($tmp1[$mapp['bmType_id']]) AND $mapp['report_name'] != 'Ahead of the Curve') {
+				$tmp1[] = $mapp['bmType_id'];
+			}
+			$tmp[$mapp['report_id']] = $tmp1;
+			$mappingData[$mapp['cate_type_name']] = $tmp;
+			unset($tmp);unset($tmp1);
+		}
+		unset($mappRow);
+		//print_r($mappingData);exit;
 		//changes in query
 		//p.cate_type_id = p.bm_id
 		
-
 		//changes in query
 		//pd.doc_type_id = pd.bm_Typeid
-		$sql1 = "SELECT 
+		/*$sql1 = "SELECT 
 				p.contact_id, pd.bm_Typeid as doc_id
 					FROM T_PM_PREFERENCE AS p 
 					INNER JOIN T_PM_PREFERENCE_DETAILS AS pd 
 						ON (p.id = pd.pref_id) 
-							WHERE pd.status = 1";
+							WHERE pd.status = 1";*/
+		$sql1 = "SELECT contact_id, report_id, cate_type_name, cate_type_id, report_name FROM T_PM_PREFERENCE_DETAILS WHERE status = 1";
 		$qry1Res = $this->fetch_assoc($sql1);
 		unset($sql1);
 		$docs = array();
-		foreach ($qry1Res as $key => $value) {
+		foreach ($qry1Res as $value) {
+			$docids = (isset($mappingData[$value['cate_type_name']][$value['report_id']]) ? $mappingData[$value['cate_type_name']][$value['report_id']] : array());
+			$prod = (($value['report_name'] == 'Ahead of the Curve') ? 2 : 0);
 			if(isset($docs[$value['contact_id']])) {
-				$docs[$value['contact_id']]['doc'] .= ','.$value['doc_id'];
+				$docs[$value['contact_id']]['doc'] .= ','.implode(',',$docids);
+				$docs[$value['contact_id']]['product'] = $prod;
 			} else {
-				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => $value['doc_id']);
+				$docs[$value['contact_id']] = array('contact_id' => $value['contact_id'], 'doc' => implode(',',$docids), 'product' => $prod);
 			}
 		}
+		unset($mappingData);
 		unset($qry1Res);
-		fwrite(STDERR, "Doc type gathered gathered...\r\n");
+		fwrite(STDERR, "Doc type gathered...\r\n");
 		
 		$sql = "SELECT 
 			p.contact_id AS id, 
-			p.contact_email AS email, 
 			p.account_name AS institution, 
 			p.cate_type_name AS subs_name, 
 			p.bm_id AS subs_id, 
 			p.status AS active, 
 			(SELECT 
-				(sfc.FirstName + '--' + sfc.LastName) 
+				(sfc.FirstName + '--' + sfc.LastName + '--' + sfc.Email) 
 				FROM dv_sf_contact AS sfc 
-					WHERE sfc.Id = p.contact_id) AS name, 
+					WHERE sfc.Id = p.contact_id) AS sfcname, 
 			(SELECT 
 				(cc.username + '--' + cc.password) 
 				FROM T_CONTACT_CREDENTIAL AS cc 
@@ -70,7 +96,7 @@ class modelPrefer extends libDatabase
 			foreach ($qryRes as $res) {
 				if(isset($resArray[$res['id']])) {
 					// Subscription value update
-					if($res['subs_id'] != '') {
+					if($res['subs_id'] != '' AND $res['subs_name'] != 'product') {
 						$subs = $resArray[$res['id']][$this->subscription[$res['subs_name']]];
 						if($subs == '') {
 							$tempRes = explode(',',$res['subs_id']);
@@ -80,6 +106,12 @@ class modelPrefer extends libDatabase
 							$tempRes = array_unique(array_merge($temp, $temp1));
 						}
 						$resArray[$res['id']][$this->subscription[$res['subs_name']]] = implode(',', $tempRes);
+					} elseif($res['subs_name'] != 'product') {
+						if($docs[$res['id']]['product'] > 0) {
+							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 2;
+						} else {
+							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 0;
+						}
 					}
 				} else {
 					$res['AU'] = '';

@@ -138,7 +138,7 @@ return true;
 		        $lines += substr_count(fread($f, 8192), "\n");
 		    }
 		    fclose($f);
-			$info['lines'] = $lines;
+			$info['lines'] = number_format($lines,0,'.',',');
 		} else {
 			$info['size'] = 0;
 			$info['last_accessed'] = '';
@@ -212,10 +212,11 @@ return true;
 		
 		fwrite(STDERR, "File writing progress...\r\n");
 		
-		if(!$fileInfo['exists']) {
-			$data = $this->addSeparator($dataArray['head']);
-			$this->appendData($destination, $data);
+		if($fileInfo['exists']) {
+			unlink($destination)
 		}
+		$data = $this->addSeparator($dataArray['head']);
+		$this->appendData($destination, $data);
 		
 		if(count($dataArray['body']) > 0) {
 			foreach($dataArray['body'] as $arr) {
@@ -259,15 +260,16 @@ return true;
 		foreach ($bodyArray as $key => $valArray) {
 			$temp = array();
 			$temp[] = '"'.$valArray['id'].'"';
-			if($valArray['name'] != '') {
-				$name = explode('--',$valArray['name']);
-				$temp[] = '"'.(isset($name[0]) ? $name[0] : '').'"';
-				$temp[] = '"'.(isset($name[1]) ? $name[1] : '').'"';
+			if($valArray['sfcname'] != '') {
+				$sfcname = explode('--',$valArray['sfcname']);
+				$temp[] = '"'.(isset($sfcname[0]) ? $sfcname[0] : '').'"';
+				$temp[] = '"'.(isset($sfcname[1]) ? $sfcname[1] : '').'"';
+				$temp[] = '"'.(isset($sfcname[2]) ? $sfcname[2] : '').'"';
 			} else {
 				$temp[] = '""';
 				$temp[] = '""';
+				$temp[] = '""';
 			}
-			$temp[] = '"'.$valArray['email'].'"';
 			$temp[] = '"'.$valArray['institution'].'"';
 			$temp[] = '"254"';
 			$temp[] = '"AU:'.$valArray['AU'].';CO:'.$valArray['CO'].';IN:'.$valArray['IN'].';EL:'.$valArray['EL'].';"';
