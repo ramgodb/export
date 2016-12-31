@@ -138,7 +138,7 @@ return true;
 		        $lines += substr_count(fread($f, 8192), "\n");
 		    }
 		    fclose($f);
-			$info['lines'] = $lines;
+			$info['lines'] = number_format($lines,0,'.',',');
 		} else {
 			$info['size'] = 0;
 			$info['last_accessed'] = '';
@@ -212,10 +212,11 @@ return true;
 		
 		fwrite(STDERR, "File writing progress...\r\n");
 		
-		if(!$fileInfo['exists']) {
-			$data = $this->addSeparator($dataArray['head']);
-			$this->appendData($destination, $data);
+		if($fileInfo['exists']) {
+			unlink($destination)
 		}
+		$data = $this->addSeparator($dataArray['head']);
+		$this->appendData($destination, $data);
 		
 		if(count($dataArray['body']) > 0) {
 			foreach($dataArray['body'] as $arr) {

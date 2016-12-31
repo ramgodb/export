@@ -41,15 +41,15 @@ class modelCompare extends libDatabase
 				foreach($res as $result) {
 					if(count($result) > 2) {
 						foreach($result as $key => $val) {
-							$temp .= "[ ".$key ."=".$val." ]<br />";
+							$temp .= "[ ".$key ."=".number_format($val,0,'.',',')." ]<br />";
 						}
 					} else {
 						$key='';
 						foreach($result as $val) {
 							if($key=='') {
-								$key = $val;
+								$key = number_format($val,0,'.',',');
 							} else {
-								$temp .= "[ ".$key ."=".$val." ]<br />";
+								$temp .= "[ ".$key ."=".number_format($val,0,'.',',')." ]<br />";
 								$key = '';
 							}
 						}
