@@ -145,11 +145,12 @@ class controlCompare extends modelCompare
 		$failStyle = 'style="background-color:#B77676;"';
 		foreach($batch as $list) {
 			list($count, $row) = $this->dashQuery($list->query, $list->table);
+			$log_count = $count[1];
 			if(is_numeric($count[1])) {
 				$count[1] = number_format($count[1],0,'.',',');
 				$count[0] = number_format($count[0],0,'.',',');
 			}
-			if(((is_numeric($count[1]) AND $count[1] > 0) OR ($count[1] != '')) AND $list->rows == $row) {
+			if(((is_numeric($count[1]) AND $count[1] > 0) OR (!is_numeric($count[1]) AND $count[1] != '')) AND $list->rows == $row) {
 				$msg .= "<tr $passStyle><td>".$c."</td><td>".$list->table."</td><td>".$count[0]."</td><td>".$count[1]."</td><td>Pass</td></tr>";
 			} else {
 				$status = false;
@@ -157,7 +158,7 @@ class controlCompare extends modelCompare
 			}
 			$available = true;
 			$c++;
-			$this->dashLog($list->table, $count[1], $set);
+			$this->dashLog($list->table, $log_count, $set);
 		}
 		if(!$available) {
 			$msg .= "<tr><td colspan='5' align='center'>Error..</td></tr>";
