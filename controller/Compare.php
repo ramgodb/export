@@ -150,10 +150,6 @@ class controlCompare extends modelCompare
 				$count[0] = number_format($count[0],0,'.',',');
 			}
 			if(((is_numeric($count[1]) AND $count[1] > 0) OR ($count[1] != '')) AND $list->rows == $row) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 6f944fbae8734838e6503ea64bd512f3939f9d09
 				$msg .= "<tr $passStyle><td>".$c."</td><td>".$list->table."</td><td>".$count[0]."</td><td>".$count[1]."</td><td>Pass</td></tr>";
 			} else {
 				$status = false;
