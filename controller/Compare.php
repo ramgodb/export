@@ -105,7 +105,7 @@ class controlCompare extends modelCompare
 			}
 		}
 		if(!$available) {
-			$msg .= "<tr><td colspan='5' align='center'>Error..</td></tr>";
+			$msg .= "<tr><td colspan='5' align='center'>No data available....</td></tr>";
 			//echo "Error : Set value provided is wrong...";
 			echo "No data available....\r\n";
 		}
