@@ -47,7 +47,7 @@ class modelCompare extends libDatabase
 						$key='';
 						foreach($result as $val) {
 							if($key=='') {
-								$key = number_format($val,0,'.',',');
+								$key = $val;
 							} else {
 								$temp .= "[ ".$key ."=".number_format($val,0,'.',',')." ]<br />";
 								$key = '';
