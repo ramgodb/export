@@ -25,7 +25,7 @@ class modelCompare extends libDatabase
 	}
 
 	protected function dashQuery($qry, $table) {
-		$tblQry = "SELECT TOP 1 count FROM T_DASHBOARD_CHECK_LOG WHERE table_name='".$table."' AND date >= DATEADD(DAY, -1, GETDATE()) ORDER BY date ASC";
+		$tblQry = "SELECT TOP 1 count FROM T_DASHBOARD_CHECK_LOG WHERE table_name='".$table."' AND date < CAST(GETDATE() AS date) ORDER BY date DESC";
 		$tblRow = $this->fetch_assoc($tblQry);
 		$prevCount = 0;
 		if(COUNT($tblRow) > 0) {
