@@ -966,42 +966,42 @@
     "0": {
       "table": "D_ANALYSTREADERSHIP_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_ANALYSTREADERSHIP_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "chennelreadership": {
     "0": {
       "table": "D_CHANNELREADERSHIP_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_CHANNELREADERSHIP_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "documenttypehits": {
     "0": {
       "table": "D_DOCUMENTTYPEHITS_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_DOCUMENTTYPEHITS_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "readershipaccount": {
     "0": {
       "table": "D_READERSHIPACC_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPACC_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "readershipdocument": {
     "0": {
       "table": "D_READERSHIPDOCUMENT_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_READERSHIPDOCUMENT_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "sectorhits": {
     "0": {
       "table": "D_SECTORHITS_CHART",
       "query": "select (period_filter),count(period_filter) AS cnt from D_SECTORHITS_CHART with(nolock) group by period_filter",
-      "rows": 6
+      "rows": 5
     }
   },
   "tickerreadership": {
