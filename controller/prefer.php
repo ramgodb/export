@@ -213,7 +213,7 @@ return true;
 		fwrite(STDERR, "File writing progress...\r\n");
 		
 		if($fileInfo['exists']) {
-			unlink($destination)
+			unlink($destination);
 		}
 		$data = $this->addSeparator($dataArray['head']);
 		$this->appendData($destination, $data);
