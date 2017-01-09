@@ -9,7 +9,13 @@ class modelPrefer extends libDatabase
 	}
 
 	private function unique($str) {
-		return implode(',',array_unique(explode(',',$str)));
+		return implode(',',
+				array_filter(
+					array_unique(
+						explode(',',$str)
+						)
+					)
+				);
 	}
 
 	protected function preferData() {
