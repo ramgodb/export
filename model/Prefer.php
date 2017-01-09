@@ -59,8 +59,14 @@ class modelPrefer extends libDatabase
 		unset($sql1);
 		$docs = array();
 		foreach ($qry1Res as $value) {
+			$prod = 0;
 			$docids = (isset($mappingData[$value['cate_type_name']][$value['report_id']]) ? $mappingData[$value['cate_type_name']][$value['report_id']] : array());
-			$prod = (($value['report_name'] == 'Ahead of the Curve') ? 2 : 0);
+			if($value['report_name'] == 'Ahead of the Curve') {
+				$prod = 2;
+				$docids = array();
+			}
+			/*$docids = (isset($mappingData[$value['cate_type_name']][$value['report_id']]) ? $mappingData[$value['cate_type_name']][$value['report_id']] : array());
+			$prod = (($value['report_name'] == 'Ahead of the Curve') ? 2 : 0);*/
 			if(isset($docs[$value['contact_id']])) {
 				$docs[$value['contact_id']]['doc'] .= ','.implode(',',$docids);
 				$docs[$value['contact_id']]['product'] = $prod;
