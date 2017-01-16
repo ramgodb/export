@@ -81,6 +81,8 @@ class controlCompare extends modelCompare
 				$source = $list->source;
 				$dest = $list->destination;
 				list($compare,$src,$dst) = $this->compare($source, $dest);
+				$src_org = $src;
+				$dst_org = $dst;
 				$src = number_format($src,0,'.',',');
 				$dst = number_format($dst,0,'.',',');
 				if($compare == 1) {
@@ -101,7 +103,7 @@ class controlCompare extends modelCompare
 				}
 				$available = true;
 				$c++;
-				$this->log($list->name, $list->description, $source, $dest, $src, $dst, $compare);
+				$this->log($list->name, $list->description, $source, $dest, $src_org, $dst_org, $compare);
 			}
 		}
 		if(!$available) {

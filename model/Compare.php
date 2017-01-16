@@ -89,9 +89,10 @@ class modelCompare extends libDatabase
 		$val2 = $db2->fetch_array($query2);
 
 		$staus = 0;
-		if($val1[0][0] > $val2[0][0]) {
+		$diff = intval($val1[0][0]) - intval($val2[0][0]);
+		if($diff > 10) {
 			$staus = 1;
-		} elseif($val1[0] < $val2[0]) {
+		} elseif($diff < -10) {
 			$staus = 2;
 		} 
 		$db1 = $db2 = null;
