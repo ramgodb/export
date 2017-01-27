@@ -15,8 +15,8 @@ class controlCheck
 		echo "</pre>";
 	}
 	public function apache() {
-		$pageurl = HTTP_PATH;
-		$filename = "information.php";
+		$pageurl = "http://jayakaranv:Password29@192.168.101.80:84/export/information.php";
+		$filename = "";
 
 		$theurl = $pageurl.$filename;
 
@@ -32,7 +32,10 @@ class controlCheck
 
 		$exec = curl_exec($ch);
 		$info = curl_getinfo($ch);
-		var_dump($info);
+		
+		if($info['http_code'] != 200) {
+			
+		}
 	}
 }
 ?>
