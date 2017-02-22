@@ -162,7 +162,6 @@ class modelPrefer extends libDatabase
 		}
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Data's collected successfully...\r\n");
-		print_array($resArray);
 		return $resArray;
 	}
 }
