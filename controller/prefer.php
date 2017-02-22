@@ -96,7 +96,8 @@ return true;
 	 * --Not derived yet--
 	 ******/
 	private function sendMail($status, $data) {
-		fwrite(STDERR, "Sending mail...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "Sending mail...\r\n");
 		$cc = $this->emailCc; 
 		$to = $this->emailTo;
 		$sub = APP . ' Preference file update : ' . $status;
@@ -104,13 +105,14 @@ return true;
 		$mail = new libMail();
 		if($mail->send_email(null,$to,$sub,$body,$cc))
 		{
-			//echo "<br>mail success";
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Mail sent successfully...\r\n");
 			return true;
-			fwrite(STDERR, "Mail sent successfully...\r\n");
 		}
 		else{
 			//echo "<br>mail fail";
-			fwrite(STDERR, "Mail sending failed...\r\n");
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Mail sending failed...\r\n");
 			return false;
 		}
 	}
@@ -121,7 +123,8 @@ return true;
 	 * @return : array();
 	 ******/
 	private function getFileDetails($filename) {
-		fwrite(STDERR, "Getting file info $filename ...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "Getting file info $filename ...\r\n");
 		$info = array();
 		$file = $filename;
 		$info['exists'] = file_exists($file);
@@ -170,7 +173,6 @@ return true;
 	 * @param2 : string => fully formated string to append to destination file
 	 ******/
 	private function appendData($dest, $data) {
-		//fwrite(STDERR, "Appending data...\r\n");
 		try {
 			// Write the contents to the file, 
 			// using the FILE_APPEND flag to append the content to the end of the file
@@ -210,7 +212,8 @@ return true;
 
 		$fileInfo = $this->getFileDetails($destination);
 		
-		fwrite(STDERR, "File writing progress...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "File writing progress...\r\n");
 		
 		if($fileInfo['exists']) {
 			unlink($destination);
@@ -235,7 +238,8 @@ return true;
 				}
 			}
 		}
-		fwrite(STDERR, "File writing completed...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "File writing completed...\r\n");
 		$fileInfoNew = $this->getFileDetails($destination);
 
 		if($fileInfoNew['exists'] AND $fileInfoNew['size'] >= $fileInfo['size']) {
@@ -247,7 +251,8 @@ return true;
 	public function generate() {
 		$time = microtime();
 		
-		fwrite(STDERR, "Starting the process...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "Starting the process...\r\n");
 		
 		$dataArray = array();
 		$filename = date('dMY') .'-COWEN-BM'. '.txt';
@@ -290,7 +295,8 @@ return true;
 			$dataArray['body'][] = $temp;
 			unset($temp);
 		}
-		fwrite(STDERR, "Data's arranged successfully...\r\n");
+		if (PHP_SAPI === 'cli') 
+			fwrite(STDERR, "Data's arranged successfully...\r\n");
 		$gen = $this->updateFile($filename, $dataArray, 'BM');
 		unset($dataArray);
 		$time1 = microtime();
