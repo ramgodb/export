@@ -325,7 +325,7 @@ return true;
 		}
 	}
 	
-	public function client_email(){
+	public function contact_email(){
 		//$query="select contact_id,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
 		
 		$result = $this->reqLib();

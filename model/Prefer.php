@@ -21,34 +21,55 @@ class modelPrefer extends libDatabase
 	protected function reqLib() {
 		$query="select contact_id,name,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
 		$result = $this->fetch_assoc($query);
+		print_r($result);
 		for($i=0;$i<count($result);$i++)
 		{
 			//$to=$result[$i]['username'];
-			$to='mkarthikeyan@godbtech.com';
+			$to='vivian@godbtech.com,mkarthikeyan@godbtech.com';
 			$contact_id=$result[$i]['contact_id'];
 			$contact_name=$result[$i]['name'];
 			$username=$result[$i]['username'];
 			$password=$result[$i]['password'];
-			$subject="Cowen Library Access";
-			$title="You have been granted access to COWEN's research. Your access credentials are below.";
+			$subject="Cowen Research Library";
 			$body="<html>
-						<body>
-							<table>
-							<tr><td rowspan='2'>".$title."</td></tr>
-							<tr><td>Username</td><td>".$username."</td></tr>
-							<tr><td>Password</td><td>".$password."</td></tr>
-							</table>
-						</body>
-					</html>
-					";
+					<body>
+						<table style='font-family: Helvetica , sans-serif; font-size: 12px;'>
+							<tr><td>Dear ".$contact_name.",</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Thank you from registering for access to Cowen's equity research.</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Here is your temporary login information. </td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Username:".$username."</td></tr>
+							<tr><td>Password:".$password."</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>You may log on to the desktop version and change your password by clicking on “Preferences” in the left-hand menu bar (your password cannot be changed in the iPad app).</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Your user name and password allows you to access Cowen's research library from your personal computer or from an iPad. </td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>To access the desktop version, please click here: <a href='https://cowenlibrary.bluematrix.com/client/library.jsp'>https://cowenlibrary.bluematrix.com/client/library.jsp</a> </td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>To download Cowen’s research app for the iPad, please click here</td></tr>
+							<tr><td><a href='https://itunes.apple.com/us/app/cowen-research/id897787610?mt=8&ign-mpt=uo=4'><img src='https://files.slack.com/files-pri/T03GP179E-F4F973SRH/pasted_image_at_2017_03_08_06_38_pm.png'></a></td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>If you have any questions, please contact your Cowen representative.</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>We thank you for your business and trust, and welcome any feedback you may have. </td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Sincerely yours,<br>Robert Fagin <br>Director of Research <br>Cowen and Company </td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Follow us on Twitter: @CowenResearch</td></tr>
+						</table>
+					</body>
+				</html>";
 			
 			$mail = new libMail();
 			if($mail->send_email(null,$to,$subject,$body,$cc))
 			{
-				$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
-				$up_result = $this->exec($up_query);
+				//$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
+				//$up_result = $this->query($up_query);
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Success')";
-				$email_result = $this->exec($up_query);
+				$email_result = $this->query($up_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sent to ".$contact_name." successfully...\r\n");
 				return true;
@@ -56,7 +77,7 @@ class modelPrefer extends libDatabase
 			else{
 				//echo "<br>mail fail";
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Failed')";
-				$email_result = $this->exec($up_query);
+				$email_result = $this->query($up_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sending failed...\r\n");
 				return false;
