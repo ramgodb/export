@@ -324,5 +324,13 @@ return true;
 			echo "File write Failed!!!";
 		}
 	}
+	
+	public function client_email(){
+		//$query="select contact_id,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
+		
+		$result = $this->reqLib();
+		
+		
+	}
 }
 ?>

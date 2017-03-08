@@ -17,7 +17,53 @@ class modelPrefer extends libDatabase
 					)
 				);
 	}
-
+	
+	protected function reqLib() {
+		$query="select contact_id,name,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
+		$result = $this->fetch_assoc($query);
+		for($i=0;$i<count($result);$i++)
+		{
+			//$to=$result[$i]['username'];
+			$to='mkarthikeyan@godbtech.com';
+			$contact_id=$result[$i]['contact_id'];
+			$contact_name=$result[$i]['name'];
+			$username=$result[$i]['username'];
+			$password=$result[$i]['password'];
+			$subject="Cowen Library Access";
+			$title="You have been granted access to COWEN's research. Your access credentials are below.";
+			$body="<html>
+						<body>
+							<table>
+							<tr><td rowspan='2'>".$title."</td></tr>
+							<tr><td>Username</td><td>".$username."</td></tr>
+							<tr><td>Password</td><td>".$password."</td></tr>
+							</table>
+						</body>
+					</html>
+					";
+			
+			$mail = new libMail();
+			if($mail->send_email(null,$to,$subject,$body,$cc))
+			{
+				$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
+				$up_result = $this->exec($up_query);
+				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Success')";
+				$email_result = $this->exec($up_query);
+				if (PHP_SAPI === 'cli') 
+					fwrite(STDERR, "Mail sent to ".$contact_name." successfully...\r\n");
+				return true;
+			}
+			else{
+				//echo "<br>mail fail";
+				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Failed')";
+				$email_result = $this->exec($up_query);
+				if (PHP_SAPI === 'cli') 
+					fwrite(STDERR, "Mail sending failed...\r\n");
+				return false;
+			}
+		}
+	}
+	
 	protected function preferData() {
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Generating data in model preferData()...\r\n");
