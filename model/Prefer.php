@@ -170,14 +170,15 @@ class modelPrefer extends libDatabase
 					(SELECT 
 						(cc.username + '--' + cc.password) 
 						FROM T_CONTACT_CREDENTIAL AS cc 
-							WHERE cc.contact_id = p.contact_id AND cc.status = 1) AS access,
+							WHERE cc.contact_id = p.contact_id AND cc.status = 1) AS access
+				FROM T_PM_PREFERENCE AS p 
+					WHERE p.status = 1"; //CAST(p.modified_on AS DATE) = CAST(GETDATE() AS DATE) AND
+					/* ,
 					analyst = STUFF((
 						SELECT ',' + md.bm_id
 						FROM M_PM_ANALYST_SECTOR md
 						WHERE p.cate_type_name = 'Sector' AND p.bm_id = md.sector_id
-						FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
-				FROM T_PM_PREFERENCE AS p 
-					WHERE p.status = 1"; //CAST(p.modified_on AS DATE) = CAST(GETDATE() AS DATE) AND
+						FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') */
 		$qryRes = $this->fetch_assoc($sql);
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Qery execution completed...\r\n");
@@ -198,12 +199,12 @@ class modelPrefer extends libDatabase
 							$tempRes = array_unique(array_merge($temp, $temp1));
 						}
 						$resArray[$res['id']][$this->subscription[$res['subs_name']]] = implode(',', $tempRes);
-						if(!is_null($res['analyst'])) {
+						/* if(!is_null($res['analyst'])) {
 							$resArray[$res['id']]['AU'] = (($resArray[$res['id']]['AU'] != '') ? $resArray[$res['id']]['AU'] . ',' . $res['analyst'] : $res['analyst']);
 							$tmp = explode(',',$resArray[$res['id']]['AU']);
 							$tmp = array_unique($tmp);
 							$resArray[$res['id']]['AU'] = implode(',',$tmp);
-						}
+						} */
 					} elseif($res['subs_name'] != 'product') {
 						if($docs[$res['id']]['product'] > 0) {
 							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 2;
@@ -218,16 +219,16 @@ class modelPrefer extends libDatabase
 					$res['EL'] = '';
 					$res['doc'] = ((isset($docs[$res['id']]['doc']) AND $docs[$res['id']]['doc'] != '') ? $this->unique($docs[$res['id']]['doc']) : 0);
 					$resArray[$res['id']] = $res;
-					if(!is_null($res['analyst'])) {
+					/* if(!is_null($res['analyst'])) {
 						$res['subs_id'] = (($res['subs_id'] != '') ? $res['subs_id'] . ',' . $res['analyst'] : '');
-					}
+					} */
 					$resArray[$res['id']][$this->subscription[$res['subs_name']]] = $res['subs_id'];
-					if(!is_null($res['analyst'])) {
+					/* if(!is_null($res['analyst'])) {
 						$resArray[$res['id']]['AU'] = (($resArray[$res['id']]['AU'] != '') ? $resArray[$res['id']]['AU'] . ',' . $res['analyst'] : $res['analyst']);
 						$tmp = explode(',',$resArray[$res['id']]['AU']);
 						$tmp = array_unique($tmp);
 						$resArray[$res['id']]['AU'] = implode(',',$tmp);
-					}
+					} */
 				}
 			}
 		}
