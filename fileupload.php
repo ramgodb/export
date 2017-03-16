@@ -2,6 +2,7 @@
 if (PHP_SAPI != 'cli') {
 	echo "Invalid Access...";
 }
+
 include_once('global/config.php');
 /* force UTC as default time format */
 date_default_timezone_set ("UTC");
@@ -12,9 +13,40 @@ include('Net/SFTP.php');
 
 $output = array('error' => false, 'msg' => '');
 
-$dest = (isset($argv[0]) ? $argv[0] : 'bm')
+$dest = (isset($argv[1]) ? $argv[1] : 'bm');
 
 if($dest == 'cia') {
+	
+	$destination = "Cowen-".APP."-".date('dMY').".txt";
+	$source = "./assets/export/CallCIA.txt";
+
+	if(!file_exists($source)) {
+		$output['error'] = true;
+		$output['msg'] = "Source file not available...";
+	} else {
+		//if(strtolower(APP) == 'prod') {
+			$sftp = new Net_SFTP('sftp.callcia.com',22);
+			if (!$sftp->login('cowen&co', 'l1stf33d')) { 
+				$output['error'] = true;
+				$output['msg'] = "sftp Login Failed...";
+			} else {
+				$result = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
+				
+				if($result) {
+					//echo "file write success";
+					$output['error'] = false;
+					$output['msg'] = "file write success...";
+				} else {
+					//echo "file write failed";
+					$output['error'] = true;
+					$output['msg'] = "file write failed...";
+				}
+			}
+		//} else {
+		//	$output['error'] = false;
+		//	$output['msg'] = "file write success...";
+		//}
+	}
 	
 } else {
 
