@@ -19,9 +19,9 @@ class modelPrefer extends libDatabase
 	}
 	
 	protected function reqLib() {
-		$query="select contact_id,name,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
+		$query="select contact_id,name,username,password,sponcer_name,sponcer_id from T_CONTACT_CREDENTIAL where mail_status=0";
 		$result = $this->fetch_assoc($query);
-		print_r($result);
+		//print_r($result);
 		for($i=0;$i<count($result);$i++)
 		{
 			//$to=$result[$i]['username'];
@@ -30,6 +30,8 @@ class modelPrefer extends libDatabase
 			$contact_name=$result[$i]['name'];
 			$username=$result[$i]['username'];
 			$password=$result[$i]['password'];
+			$sponcer_id=$result[$i]['sponcer_id'];
+			$sponcer_name=$result[$i]['sponcer_name'];
 			$subject="Cowen Research Library";
 			$body="<html>
 					<body>
@@ -69,15 +71,45 @@ class modelPrefer extends libDatabase
 				//$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
 				//$up_result = $this->query($up_query);
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Success')";
-				$email_result = $this->query($up_query);
+				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sent to ".$contact_name." successfully...\r\n");
+				$sp_query="select Email from EMPLOYEE_SUMMARY where HREmpID='$sponcer_id'";
+				$sp_result = $this->fetch_assoc($sp_query);
+				//$sp_to=$sp_result[0]['Email'];
+				$sp_to='mkarthikeyan@godbtech.com';
+				$sp_subject="Cowen Research Library Access Granted";
+				$sp_body="<html>
+					<body>
+						<table style='font-family: Helvetica , sans-serif; font-size: 12px;'>
+							<tr><td>Dear ".$sponcer_name.",</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Access to Cowen's equity research is granted to ".$contact_name.".</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td>Sincerely yours,<br>Robert Fagin <br>Director of Research <br>Cowen and Company </td></tr>
+							<tr><td>&nbsp;</td></tr>
+						</table>
+					</body>
+				</html>";
+				if($mail->send_email(null,$sp_to,$sp_subject,$sp_body,$sp_cc))
+				{
+					$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$sp_to','$sp_subject','$sp_body','Local','prism', 'Success')";
+					$email_result = $this->query($email_query);
+					if (PHP_SAPI === 'cli') 
+						fwrite(STDERR, "Mail sent to ".$sponcer_name." successfully...\r\n");
+				}
+				else {
+					$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$sp_to','$sp_subject','$sp_body','Local','prism', 'Failed')";
+					$email_result = $this->query($email_query);
+					if (PHP_SAPI === 'cli') 
+						fwrite(STDERR, "Mail sending failed...\r\n");
+				}
 				return true;
 			}
 			else{
 				//echo "<br>mail fail";
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Failed')";
-				$email_result = $this->query($up_query);
+				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sending failed...\r\n");
 				return false;
