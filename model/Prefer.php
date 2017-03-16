@@ -50,7 +50,7 @@ class modelPrefer extends libDatabase
 							<tr><td>To access the desktop version, please click here: <a href='https://cowenlibrary.bluematrix.com/client/library.jsp'>https://cowenlibrary.bluematrix.com/client/library.jsp</a> </td></tr>
 							<tr><td>&nbsp;</td></tr>
 							<tr><td>To download Cowen’s research app for the iPad, please click here</td></tr>
-							<tr><td><a href='https://itunes.apple.com/us/app/cowen-research/id897787610?mt=8&ign-mpt=uo=4'><img src='https://files.slack.com/files-pri/T03GP179E-F4F973SRH/pasted_image_at_2017_03_08_06_38_pm.png'></a></td></tr>
+							<tr><td><a href='https://itunes.apple.com/us/app/cowen-research/id897787610?mt=8&ign-mpt=uo=4'><img src='https://conferences.cowen.com/webforms/ExternalImg/bmIpad.png'></a></td></tr>
 							<tr><td>&nbsp;</td></tr>
 							<tr><td>If you have any questions, please contact your Cowen representative.</td></tr>
 							<tr><td>&nbsp;</td></tr>
