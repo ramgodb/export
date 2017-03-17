@@ -127,6 +127,10 @@ spl_autoload_register(function($name){
 		$name = substr($name, 3);
 		$requirePath = ROOT_PATH."lib/$name.php";
 	}
+	if($name=='phpexcel')
+	{
+		$requirePath = ROOT_PATH."plugins/phpexcel/Classes/$name.php";
+	}
 	if(file_exists($requirePath)) {
 		include_once($requirePath);
 		return true;
