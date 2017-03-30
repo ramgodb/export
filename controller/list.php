@@ -273,7 +273,7 @@ class controlList extends modellist
 			$analyst_full_name = $analyst_fname." ".$analyst_lname;
 			
 			$contact_name_arr = explode(" ", $valArray['contact_name']);
-			$contact_fname = $contact_name_arr[1];
+			$contact_fname = $contact_name_arr[0];
 			$contact_lname = end($contact_name_arr);
 			$account_name = $valArray['acc_name'];
 			$contact_phno1 = $valArray['contact_phone_1'];
