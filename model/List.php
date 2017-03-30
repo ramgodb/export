@@ -124,7 +124,11 @@ class modelList extends libDatabase
 	protected function listData() {
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Generating data in model listData()...\r\n");
-		$mappQry = "SELECT LD.acc_name, LD.contact_phone_1, LD.contact_phone_2, LD.contact_email, LD.contact_id  FROM T_D_LIST_HEADER LH INNER JOIN T_D_LIST_DETAIL LD ON LH.list_id = LD.list_id WHERE LH.locked_status = '1' ORDER BY LD.contact_name ASC";
+		$mappQry = "SELECT LH.list_id, S.HREmplID AS analyst_id, S.FirstName, S.LastName, LD.contact_name, LD.acc_name, LD.contact_phone_1, LD.contact_phone_2, LD.contact_email, LD.contact_id FROM
+						T_D_LIST_HEADER LH INNER JOIN T_D_LIST_DETAIL LD ON LH.list_id = LD.list_id
+						INNER JOIN EMPLOYEE_SUMMARY S ON LH.emp_id= S.HREmplID
+						WHERE LH.locked_status = '1' 
+						ORDER BY LD.contact_name ASC";
 		$mappRow = $this->fetch_assoc($mappQry);
 		
 		if (PHP_SAPI === 'cli') 

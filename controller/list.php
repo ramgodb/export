@@ -217,8 +217,10 @@ class controlList extends modellist
 		if($fileInfo['exists']) {
 			unlink($destination);
 		}
-		$data = $this->addSeparator($dataArray['head']);
-		$this->appendData($destination, $data);
+		if(!empty($dataArray['head'])) {
+			$data = $this->addSeparator($dataArray['head']);
+			$this->appendData($destination, $data);
+		}
 		
 		if(count($dataArray['body']) > 0) {
 			foreach($dataArray['body'] as $arr) {
@@ -257,49 +259,46 @@ class controlList extends modellist
 		$dataArray = array();
 		$filename = "List_".date('dMY') .'-COWEN-BM'. '.txt';
 
-		$dataArray['head'] = array("ListId", "TraderId", "UserName", "FirstName", "LastName", "AccountName",  "PhoneNumber1",  "PhoneNumber2", "Email", "ContactId");
+		$dataArray['head'] = array();
+		//$dataArray['head'] = array("ListId", "TraderId", "UserName", "FirstName", "LastName", "AccountName",  "PhoneNumber1",  "PhoneNumber2", "Email", "ContactId");
 		$dataArray['body'] = array();
 		
 		$bodyArray = $this->listData();
-		echo "<pre>";
-		print_r($bodyArray);
-		exit;
 		foreach ($bodyArray as $key => $valArray) {
 			$temp = array();
-			$temp[] = '"'.$valArray['id'].'"';
-			if($valArray['sfcname'] != '') {
-				$sfcname = explode('--',$valArray['sfcname']);
-				$temp[] = '"'.(isset($sfcname[0]) ? $sfcname[0] : '').'"';
-				$temp[] = '"'.(isset($sfcname[1]) ? $sfcname[1] : '').'"';
-				$temp[] = '"'.(isset($sfcname[2]) ? $sfcname[2] : '').'"';
-			} else {
-				$temp[] = '""';
-				$temp[] = '""';
-				$temp[] = '""';
-			}
-			$temp[] = '"'.$valArray['institution'].'"';
-			$temp[] = '"254"';
-			$temp[] = '"AU:'.$valArray['AU'].';CO:'.$valArray['CO'].';IN:'.$valArray['IN'].';EL:'.$valArray['EL'].';"';
-			$temp[] = '"'.$valArray['doc'].'"';
-			$temp[] = '"1"';
-			$temp[] = '"'.$valArray['active'].'"';
-			if($valArray['access'] != '') {
-				$access = explode('--',$valArray['access']);
-				$temp[] = '"1"';
-				$temp[] = '"'.$access[0].'"';
-				$temp[] = '"'.$access[1].'"';
-			} else {
-				$temp[] = '"0"';
-				$temp[] = '""';
-				$temp[] = '""';
-			}
-
+			$list_id = $valArray['list_id'];
+			$analyst_id = $valArray['analyst_id'];
+			$analyst_fname = $valArray['FirstName'];
+			$analyst_lname = $valArray['LastName'];
+			$analyst_full_name = $analyst_fname." ".$analyst_lname;
+			
+			$contact_name_arr = explode(" ", $valArray['contact_name']);
+			$contact_fname = $contact_name_arr[1];
+			$contact_lname = end($contact_name_arr);
+			$account_name = $valArray['acc_name'];
+			$contact_phno1 = $valArray['contact_phone_1'];
+			$contact_phno2 = $valArray['contact_phone_2'];
+			$contact_email = $valArray['contact_email'];
+			$contact_id = $valArray['contact_id'];
+			
+			
+			$temp[] = $list_id;
+			$temp[] = $analyst_id;
+			$temp[] = $analyst_full_name;
+			$temp[] = $contact_fname;
+			$temp[] = $contact_lname;
+			$temp[] = $account_name;
+			$temp[] = $contact_phno1;
+			$temp[] = $contact_phno2;
+			$temp[] = $contact_email;
+			$temp[] = $contact_id;
 			$dataArray['body'][] = $temp;
 			unset($temp);
 		}
+		array_shift($dataArray);
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Data's arranged successfully...\r\n");
-		$gen = $this->updateFile($filename, $dataArray, 'BM');
+		$gen = $this->updateFile($filename, $dataArray, 'cia');
 		unset($dataArray);
 		$time1 = microtime();
 		$exec_time = $time1 - $time;
