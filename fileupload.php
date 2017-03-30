@@ -17,8 +17,9 @@ $dest = (isset($argv[1]) ? $argv[1] : 'bm');
 
 if($dest == 'cia') {
 	
-	$destination = "Cowen-".APP."-".date('dMY').".txt";
-	$source = "./assets/export/CallCIA.txt";
+	$destination = "Cowen-".APP."-".date('dMY').".txt";//If they want to change file
+	$filename = "List_".date('dMY') .'-COWEN-BM'. '.txt';
+	$source = "./assets/export/".$filename;
 
 	if(!file_exists($source)) {
 		$output['error'] = true;

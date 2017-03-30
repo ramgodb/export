@@ -100,7 +100,7 @@ class controlList extends modellist
 			fwrite(STDERR, "Sending mail...\r\n");
 		$cc = $this->emailCc; 
 		$to = $this->emailTo;
-		$sub = APP . ' Preference file update : ' . $status;
+		$sub = APP . ' BBM List Management file update : ' . $status;
 		$body = $data;
 		$mail = new libMail();
 		if($mail->send_email(null,$to,$sub,$body,$cc))
