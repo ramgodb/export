@@ -13,85 +13,6 @@ class controlList extends modellist
 			$this->sftpFile = "/incoming/BMEntitlements.txt";
 	}
 	
-	public function test()
-	{
-		echo "test";exit;
-		/*$file = $this->path . date('dMY') .'-COWEN-BM'. '.txt';
-		$fileInfoNew = $this->getFileDetails($file);
-		echo "<pre>";print_r($fileInfoNew);echo "</pre>";exit;*/
-		//$file = date('dMY') .'-COWEN-BM'. '.txt';
-		/*if($this->sendFile()) {
-			echo "file write success...";
-		} else {
-			echo "file write failed...";
-		}*/
-		/* $bodyArray = $this->preferData();
-		echo "<pre>";		
-		print_r($bodyArray);
-		echo "</pre>";exit; */
-		/*$msg = '<p>Checkjing the information</p>';
-		$this->sendMail('Success',$msg);*/
-		// $file = $this->path . 'sample.txt';
-		// echo $file;
-		// $data = file_get_contents($file);
-
-		// if(preg_match( '#[\R]+#',"\r" )) {
-		// 	echo "available";
-		// } else {
-		// 	echo "not available";
-		// }
-
-		//$frmt = explode('\n',$data);
-		//echo '<textarea rows="10" cols="100">'.$data.'</textarea>';
-		//$frmt = str_split($data);
-		//var_dump($frmt);
-	}
-	
-	private function sendFile() {
-		/* $sftp = new libSftp();
-		$send = $sftp->upload($source, $this->sftpFile);
-		if(!$send) {
-			return false;
-		}
-		return true; */
-		
-		//set_include_path(ROOT_PATH);
-		
-		$enc = time();
-		$_SESSION['export_upload'] = $enc;
-		
-		$useragent = $_SERVER['HTTP_USER_AGENT'];
-		//$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
-		//session_write_close();
-
-		$qry_str = '';//"?x=10&y=20";
-		$ch = curl_init();
-		// Set query data here with the URL
-		curl_setopt($ch, CURLOPT_URL, HTTP_PATH . 'fileupload.php' . $qry_str); 
-
-		curl_setopt($ch,CURLOPT_USERAGENT, $useragent);
-		//curl_setopt( $ch, CURLOPT_COOKIE, $strCookie );
-
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		//curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-		//curl_setopt($ch, CURLOPT_USERPWD, "jayakaranv:Password27");
-		curl_setopt($ch, CURLOPT_TIMEOUT, '3');
-		$content = trim(curl_exec($ch));
-		curl_close($ch);
-		var_dump($content);
-
-		return true;
-
-		//$result = file_get_contents("./fileupload.php", FILE_USE_INCLUDE_PATH);
-		//$res = json_decode($result);
-		//var_dump($res);
-		/*if($res->error) {
-			return false;
-		} else {
-			return true;
-		}*/
-	}
-	
 	/******
 	 * --Not derived yet--
 	 ******/
@@ -207,46 +128,54 @@ class controlList extends modellist
 	 * @param3 : string => subfolder
 	 ******/
 	private function updateFile($file, $dataArray, $to) {
-		$destination = $this->path . $file;
-
-		$fileInfo = $this->getFileDetails($destination);
-		
-		if (PHP_SAPI === 'cli') 
-			fwrite(STDERR, "File writing progress...\r\n");
-		
-		if($fileInfo['exists']) {
-			unlink($destination);
+		if (!file_exists($this->path)) {
+			$dir_stat = mkdir($this->path, 0777);
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Creating folder success ..." .$this->path. " \r\n");
 		}
-		if(!empty($dataArray['head'])) {
-			$data = $this->addSeparator($dataArray['head']);
-			$this->appendData($destination, $data);
+		else if(is_dir($this->path)) {
+			$dir_stat = 1;
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Folder path found ...".$this->path." \r\n");
 		}
-		
-		if(count($dataArray['body']) > 0) {
-			foreach($dataArray['body'] as $arr) {
-				$data = $this->addSeparator($arr);
-				//$searchRes = $this->searchInFile($arr[0], $destination);
-				$insert = true;
-				/* if($searchRes) {
-					foreach($searchRes as $sRes) {
-						if(trim($sRes) == trim($data)) {
-							$insert = false;
-						}
+		else {
+			$dir_stat = 0;
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Line number ".__LINE__.$this->path." Creating folder failed ...\r\n");
+		}
+		if($dir_stat == 1) {
+			$destination = $this->path . $file;
+			$fileInfo = $this->getFileDetails($destination);		
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "File writing progress...\r\n");
+			if($fileInfo['exists']) {
+				unlink($destination);
+			}
+			if(!empty($dataArray['head'])) {
+				$data = $this->addSeparator($dataArray['head']);
+				$this->appendData($destination, $data);
+			}
+			if(count($dataArray['body']) > 0) {
+				foreach($dataArray['body'] as $arr) {
+					$data = $this->addSeparator($arr);
+					$insert = true;
+					if($insert == true) {
+						$this->appendData($destination, $data);
 					}
-				} */ 
-				if($insert == true) {
-					$this->appendData($destination, $data);
 				}
 			}
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "File writing completed...\r\n");
+			$fileInfoNew = $this->getFileDetails($destination);
+			if($fileInfoNew['exists'] AND $fileInfoNew['size'] >= $fileInfo['size']) {
+				return $fileInfoNew;
+			}
+			return false;
 		}
-		if (PHP_SAPI === 'cli') 
-			fwrite(STDERR, "File writing completed...\r\n");
-		$fileInfoNew = $this->getFileDetails($destination);
-
-		if($fileInfoNew['exists'] AND $fileInfoNew['size'] >= $fileInfo['size']) {
-			return $fileInfoNew;
+		else {
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Line number ".__LINE__." ".$this->path." Creating folder failed ...\r\n");
 		}
-		return false;
 	}
 	
 	public function generate() {
@@ -264,74 +193,72 @@ class controlList extends modellist
 		$dataArray['body'] = array();
 		
 		$bodyArray = $this->listData();
-		foreach ($bodyArray as $key => $valArray) {
-			$temp = array();
-			$list_id = $valArray['list_id'];
-			$analyst_id = $valArray['analyst_id'];
-			$analyst_fname = $valArray['FirstName'];
-			$analyst_lname = $valArray['LastName'];
-			$analyst_full_name = $analyst_fname." ".$analyst_lname;
-			
-			$contact_name_arr = explode(" ", $valArray['contact_name']);
-			$contact_fname = $contact_name_arr[0];
-			$contact_lname = end($contact_name_arr);
-			$account_name = $valArray['acc_name'];
-			$contact_phno1 = $valArray['contact_phone_1'];
-			$contact_phno2 = $valArray['contact_phone_2'];
-			$contact_email = $valArray['contact_email'];
-			$contact_id = $valArray['contact_id'];
-			
-			
-			$temp[] = $list_id;
-			$temp[] = $analyst_id;
-			$temp[] = $analyst_full_name;
-			$temp[] = $contact_fname;
-			$temp[] = $contact_lname;
-			$temp[] = $account_name;
-			$temp[] = $contact_phno1;
-			$temp[] = $contact_phno2;
-			$temp[] = $contact_email;
-			$temp[] = $contact_id;
-			$dataArray['body'][] = $temp;
-			unset($temp);
+		if(count($bodyArray) > 0) {
+			foreach ($bodyArray as $key => $valArray) {
+				$temp = array();
+				$cia_user_id = $valArray['cia_user_id'];
+				$list_id = $valArray['list_id'];
+				$analyst_fname = $valArray['FirstName'];
+				$analyst_lname = $valArray['LastName'];
+				$analyst_full_name = $analyst_fname." ".$analyst_lname;
+				
+				$contact_name_arr = explode(" ", $valArray['contact_name']);
+				$contact_fname = $contact_name_arr[0];
+				$contact_lname = end($contact_name_arr);
+				$account_name = $valArray['acc_name'];
+				$contact_phno1 = $valArray['contact_phone_1'];
+				$contact_phno2 = $valArray['contact_phone_2'];
+				$contact_email = $valArray['contact_email'];
+				$contact_id = $valArray['contact_id'];
+				
+				$temp[] = $cia_user_id;
+				$temp[] = $list_id;
+				$temp[] = $analyst_full_name;
+				$temp[] = $contact_fname;
+				$temp[] = $contact_lname;
+				$temp[] = $account_name;
+				$temp[] = $contact_phno1;
+				$temp[] = $contact_phno2;
+				$temp[] = $contact_email;
+				$temp[] = $contact_id;
+				$dataArray['body'][] = $temp;
+				unset($temp);
+			}
+			if (PHP_SAPI === 'cli') 
+				fwrite(STDERR, "Data's arranged successfully...\r\n");
+			$gen = $this->updateFile($filename, $dataArray, 'cia');
+			unset($dataArray);
+			$time1 = microtime();
+			$exec_time = $time1 - $time;
+
+			$httppath = HTTP_PATH . 'assets/export/' . $filename;
+
+			$msg = '<div style="width:600px;border:2px #CCC solid;padding:5px;">';
+			$msg .= '<h3>File write Status...</h3>';
+			$msg .= '<p><b>Time taken to update :</b> '.$exec_time.'<p>';
+			$msg .= '<p><b>Filename :</b> '.$filename.'<p>';
+			$msg .= '<p><b>Filesize :</b> '.$gen['size'].'<p>';
+			$msg .= '<p><b>Total lines :</b> '.$gen['lines'].' KB<p>';
+			$msg .= '<p><b>File Path :</b> http://192.168.0.69:84/api/v1/preference/BM/'.$filename.'<p>';
+			$msg .= '</div>';
+
+			if($gen) {
+				$this->sendMail('success', $msg);
+				echo "Time taken to update : $exec_time<br>";
+				echo "File write Success!!!\n";
+			} else {
+				$this->sendMail('fail', $msg);
+				echo "File write Failed!!!";
+			}
 		}
-		array_shift($dataArray);
-		if (PHP_SAPI === 'cli') 
-			fwrite(STDERR, "Data's arranged successfully...\r\n");
-		$gen = $this->updateFile($filename, $dataArray, 'cia');
-		unset($dataArray);
-		$time1 = microtime();
-		$exec_time = $time1 - $time;
-
-		$httppath = HTTP_PATH . 'assets/export/' . $filename;
-
-		$msg = '<div style="width:600px;border:2px #CCC solid;padding:5px;">';
-		$msg .= '<h3>File write Status...</h3>';
-		$msg .= '<p><b>Time taken to update :</b> '.$exec_time.'<p>';
-		$msg .= '<p><b>Filename :</b> '.$filename.'<p>';
-		$msg .= '<p><b>Filesize :</b> '.$gen['size'].'<p>';
-		$msg .= '<p><b>Total lines :</b> '.$gen['lines'].' KB<p>';
-		$msg .= '<p><b>File Path :</b> http://192.168.0.69:84/api/v1/preference/BM/'.$filename.'<p>';
-		$msg .= '</div>';
-
-		if($gen) {
-			$this->sendMail('success', $msg);
-			//echo $msg;
-			echo "Time taken to update : $exec_time<br>";
-			//echo '<a href="'.$httppath.'" target="_blank">'.$httppath.'</a>';
-			echo "File write Success!!!\n";
-		} else {
-			$this->sendMail('fail', $msg);
-			echo "File write Failed!!!";
+		else {
+			echo "No data to write the file!!!";
 		}
 	}
 	
 	public function contact_email(){
 		//$query="select contact_id,username,password from T_CONTACT_CREDENTIAL where mail_status=0";
-		
 		$result = $this->reqLib();
-		
-		
 	}
 }
 ?>
