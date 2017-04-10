@@ -21,10 +21,8 @@ class modelList extends libDatabase
 	protected function reqLib() {
 		$query="select contact_id,name,username,password,sponcer_name,sponcer_id from T_CONTACT_CREDENTIAL where mail_status=0";
 		$result = $this->fetch_assoc($query);
-		//print_r($result);
 		for($i=0;$i<count($result);$i++)
 		{
-			//$to=$result[$i]['username'];
 			$to='mkarthikeyan@godbtech.com';
 			$contact_id=$result[$i]['contact_id'];
 			$contact_name=$result[$i]['name'];
@@ -77,7 +75,6 @@ class modelList extends libDatabase
 					fwrite(STDERR, "Mail sent to ".$contact_name."---".$to." successfully...\r\n");
 				$sp_query="select Email from EMPLOYEE_SUMMARY where HREmpID='$sponcer_id'";
 				$sp_result = $this->fetch_assoc($sp_query);
-				//$sp_to=$sp_result[0]['Email'];
 				$sp_to='mkarthikeyan@godbtech.com';
 				$sp_subject="Cowen Research Library Access Granted";
 				$sp_body="<html>
@@ -108,13 +105,11 @@ class modelList extends libDatabase
 				return true;
 			}
 			else{
-				//echo "<br>mail fail";
 				$body=str_replace("'","''",$body);
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Failed')";
 				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sending failed...\r\n");
-				//return false;
 			}
 			sleep(1);
 		}
@@ -124,11 +119,15 @@ class modelList extends libDatabase
 	protected function listData() {
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Generating data in model listData()...\r\n");
-		$mappQry = "SELECT LH.list_id, S.HREmplID AS analyst_id, S.FirstName, S.LastName, LD.contact_name, LD.acc_name, LD.contact_phone_1, LD.contact_phone_2, LD.contact_email, LD.contact_id FROM
+		$bvm_qry = "SELECT param_value FROM M_PARAM WHERE param_name = 'BVM_LIST_VAL'";
+		$bvm_row = $this->fetch_assoc($bvm_qry);
+		$bvm_param_name = $bvm_row[0]['param_value'];
+		$mappQry = "SELECT UD.cia_user_id, LH.list_id, S.FirstName, S.LastName, LD.contact_name, LD.acc_name, LD.contact_phone_1, LD.contact_phone_2, LD.contact_email, LD.contact_id FROM
 						T_D_LIST_HEADER LH INNER JOIN T_D_LIST_DETAIL LD ON LH.list_id = LD.list_id
 						INNER JOIN EMPLOYEE_SUMMARY S ON LH.emp_id= S.HREmplID
-						WHERE LH.locked_status = '1' 
-						ORDER BY LD.contact_name ASC";
+						INNER JOIN M_BVM_USER_DETAILS UD ON UD.analyst_id= S.HREmplID
+						WHERE LH.name = '".$bvm_param_name."'  
+						ORDER BY LD.contact_name ASC";// LH.locked_status = '1'
 		$mappRow = $this->fetch_assoc($mappQry);
 		
 		if (PHP_SAPI === 'cli') 
