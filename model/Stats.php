@@ -604,10 +604,12 @@ class modelStats extends libDatabase
 				}
 				$objPHPExcel->setActiveSheetIndex(0);
 				$path = $_SERVER['DOCUMENT_ROOT']."/uploads/userstats/";
-				$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+				//$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
 				$objWriter->setIncludeCharts(true);
 				ob_clean();
-				$objWriter->save($path.$download_filename.'.xlsx');
+				$objWriter->save(str_replace('.php', '.xls',$path.$download_filename.'.xls'));
+				//$objWriter->save($path.$download_filename.'.xlsx');
 
 				$filename=$download_filename.'.xlsx';
 				$file = $path.$filename;

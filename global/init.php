@@ -127,9 +127,16 @@ spl_autoload_register(function($name){
 		$name = substr($name, 3);
 		$requirePath = ROOT_PATH."lib/$name.php";
 	}
-	if($name=='phpexcel')
+	if($name == 'PHPExcel') {
+		$name = substr($name, 3);
+		include("$docroot/phpexcel/Classes/PHPExcel.php");
+	}
+	if( strpos($name, "PHPExcel") === 0 )
 	{
-		$requirePath = ROOT_PATH."plugins/phpexcel/Classes/$name.php";
+		$name = substr($name, 9);
+		$path = explode('_',$name);
+		$name = implode('/',$path);
+		include("$docroot/phpexcel/Classes/PHPExcel/$name.php");
 	}
 	if(file_exists($requirePath)) {
 		include_once($requirePath);
