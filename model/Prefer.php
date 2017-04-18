@@ -25,7 +25,7 @@ class modelPrefer extends libDatabase
 		for($i=0;$i<count($result);$i++)
 		{
 			//$to=$result[$i]['username'];
-			$to='vivian@godbtech.com,mkarthikeyan@godbtech.com';
+			$to='mkarthikeyan@godbtech.com';
 			$contact_id=$result[$i]['contact_id'];
 			$contact_name=$result[$i]['name'];
 			$username=$result[$i]['username'];
@@ -45,13 +45,13 @@ class modelPrefer extends libDatabase
 							<tr><td>Username:".$username."</td></tr>
 							<tr><td>Password:".$password."</td></tr>
 							<tr><td>&nbsp;</td></tr>
-							<tr><td>You may log on to the desktop version and change your password by clicking on “Preferences” in the left-hand menu bar (your password cannot be changed in the iPad app).</td></tr>
+							<tr><td>You may log on to the desktop version and change your password by clicking on *Preferences* in the left-hand menu bar (your password cannot be changed in the iPad app).</td></tr>
 							<tr><td>&nbsp;</td></tr>
 							<tr><td>Your user name and password allows you to access Cowen's research library from your personal computer or from an iPad. </td></tr>
 							<tr><td>&nbsp;</td></tr>
 							<tr><td>To access the desktop version, please click here: <a href='https://cowenlibrary.bluematrix.com/client/library.jsp'>https://cowenlibrary.bluematrix.com/client/library.jsp</a> </td></tr>
 							<tr><td>&nbsp;</td></tr>
-							<tr><td>To download Cowen’s research app for the iPad, please click here</td></tr>
+							<tr><td>To download Cowen's research app for the iPad, please click here</td></tr>
 							<tr><td><a href='https://itunes.apple.com/us/app/cowen-research/id897787610?mt=8&ign-mpt=uo=4'><img src='https://conferences.cowen.com/webforms/ExternalImg/bmIpad.png'></a></td></tr>
 							<tr><td>&nbsp;</td></tr>
 							<tr><td>If you have any questions, please contact your Cowen representative.</td></tr>
@@ -64,16 +64,17 @@ class modelPrefer extends libDatabase
 						</table>
 					</body>
 				</html>";
-			
+			$body=str_replace('*','"',$body);
 			$mail = new libMail();
 			if($mail->send_email(null,$to,$subject,$body,$cc))
 			{
-				//$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
-				//$up_result = $this->query($up_query);
+				$up_query="update T_CONTACT_CREDENTIAL set mail_status=1,mail_date=getdate() where contact_id='$contact_id'";
+				$up_result = $this->query($up_query);
+				$body=str_replace("'","''",$body);
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Success')";
 				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
-					fwrite(STDERR, "Mail sent to ".$contact_name." successfully...\r\n");
+					fwrite(STDERR, "Mail sent to ".$contact_name."---".$to." successfully...\r\n");
 				$sp_query="select Email from EMPLOYEE_SUMMARY where HREmpID='$sponcer_id'";
 				$sp_result = $this->fetch_assoc($sp_query);
 				//$sp_to=$sp_result[0]['Email'];
@@ -108,13 +109,16 @@ class modelPrefer extends libDatabase
 			}
 			else{
 				//echo "<br>mail fail";
+				$body=str_replace("'","''",$body);
 				$email_query="insert into T_EMAIL_LOG (email_from,email_to,email_subject,email_content,from_ip,user_id,email_status) values ('Prism Alert<prism-alerts@cowen.com>','$to','$subject','$body','Local','prism', 'Failed')";
 				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sending failed...\r\n");
-				return false;
+				//return false;
 			}
+			sleep(1);
 		}
+		return true;
 	}
 	
 	protected function preferData() {
@@ -198,14 +202,15 @@ class modelPrefer extends libDatabase
 					(SELECT 
 						(cc.username + '--' + cc.password) 
 						FROM T_CONTACT_CREDENTIAL AS cc 
-							WHERE cc.contact_id = p.contact_id AND cc.status = 1) AS access,
+							WHERE cc.contact_id = p.contact_id AND cc.status = 1) AS access
+				FROM T_PM_PREFERENCE AS p 
+					WHERE p.status = 1"; //CAST(p.modified_on AS DATE) = CAST(GETDATE() AS DATE) AND
+					/* ,
 					analyst = STUFF((
 						SELECT ',' + md.bm_id
 						FROM M_PM_ANALYST_SECTOR md
 						WHERE p.cate_type_name = 'Sector' AND p.bm_id = md.sector_id
-						FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '')
-				FROM T_PM_PREFERENCE AS p 
-					WHERE p.status = 1"; //CAST(p.modified_on AS DATE) = CAST(GETDATE() AS DATE) AND
+						FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 1, '') */
 		$qryRes = $this->fetch_assoc($sql);
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Qery execution completed...\r\n");
@@ -226,12 +231,12 @@ class modelPrefer extends libDatabase
 							$tempRes = array_unique(array_merge($temp, $temp1));
 						}
 						$resArray[$res['id']][$this->subscription[$res['subs_name']]] = implode(',', $tempRes);
-						if(!is_null($res['analyst'])) {
+						/* if(!is_null($res['analyst'])) {
 							$resArray[$res['id']]['AU'] = (($resArray[$res['id']]['AU'] != '') ? $resArray[$res['id']]['AU'] . ',' . $res['analyst'] : $res['analyst']);
 							$tmp = explode(',',$resArray[$res['id']]['AU']);
 							$tmp = array_unique($tmp);
 							$resArray[$res['id']]['AU'] = implode(',',$tmp);
-						}
+						} */
 					} elseif($res['subs_name'] != 'product') {
 						if($docs[$res['id']]['product'] > 0) {
 							$resArray[$res['id']][$this->subscription[$res['subs_name']]] = 2;
@@ -246,16 +251,16 @@ class modelPrefer extends libDatabase
 					$res['EL'] = '';
 					$res['doc'] = ((isset($docs[$res['id']]['doc']) AND $docs[$res['id']]['doc'] != '') ? $this->unique($docs[$res['id']]['doc']) : 0);
 					$resArray[$res['id']] = $res;
-					if(!is_null($res['analyst'])) {
+					/* if(!is_null($res['analyst'])) {
 						$res['subs_id'] = (($res['subs_id'] != '') ? $res['subs_id'] . ',' . $res['analyst'] : '');
-					}
+					} */
 					$resArray[$res['id']][$this->subscription[$res['subs_name']]] = $res['subs_id'];
-					if(!is_null($res['analyst'])) {
+					/* if(!is_null($res['analyst'])) {
 						$resArray[$res['id']]['AU'] = (($resArray[$res['id']]['AU'] != '') ? $resArray[$res['id']]['AU'] . ',' . $res['analyst'] : $res['analyst']);
 						$tmp = explode(',',$resArray[$res['id']]['AU']);
 						$tmp = array_unique($tmp);
 						$resArray[$res['id']]['AU'] = implode(',',$tmp);
-					}
+					} */
 				}
 			}
 		}
