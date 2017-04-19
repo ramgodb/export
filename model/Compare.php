@@ -23,6 +23,102 @@ class modelCompare extends libDatabase
 		$output['salesforce'] = (isset($sfRow[0]['cnt']) ? $sfRow[0]['cnt'] : null);
 		return $output;
 	}
+	
+	public function sfInterest(){
+		
+		$sfInterestSubTypeAtt = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sub_type_attr HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSubTypeAttRow = $this->fetch_assoc($sfInterestSubTypeAtt);
+		$output = array();
+		if(count($sfInterestSubTypeAttRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sub_type_attr';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestSubType = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sub_type HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSubTypeRow = $this->fetch_assoc($sfInterestSubType);
+		$output = array();
+		if(count($sfInterestSubTypeRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sub_type';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestAtt = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_attr HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestAttRow = $this->fetch_assoc($sfInterestAtt);
+		$output = array();
+		if(count($sfInterestAttRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_attr';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestSub = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sub HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSubRow = $this->fetch_assoc($sfInterestSub);
+		$output = array();
+		if(count($sfInterestSubRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sub';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterest = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestRow = $this->fetch_assoc($sfInterest);
+		$output = array();
+		if(count($sfInterestRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestSponsor = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sponsor HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSponsorRow = $this->fetch_assoc($sfInterestSponsor);
+		$output = array();
+		if(count($sfInterestSponsorRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sponsor';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestBmDType = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_bm_doc_type HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestBmDTypeRow = $this->fetch_assoc($sfInterestBmDType);
+		$output = array();
+		if(count($sfInterestBmDTypeRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_bm_doc_type';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestSubCoverage = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sub_coverage HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSubCoverageRow = $this->fetch_assoc($sfInterestSubCoverage);
+		$output = array();
+		if(count($sfInterestSubCoverageRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sub_coverage';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestSubTypeAttBMType = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_sub_type_attr_bmtype HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestSubTypeAttBMTypeRow = $this->fetch_assoc($sfInterestSubTypeAttBMType);
+		$output = array();
+		if(count($sfInterestSubTypeAttBMTypeRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_sub_type_attr_bmtype';
+			array_push($output, $arrVal);
+		}
+		
+		$sfRecordType = "select MAX(LastModifiedDate) as last_update from dv_sf_recordtype HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfRecordTypeRow = $this->fetch_assoc($sfRecordType);
+		$output = array();
+		if(count($sfRecordTypeRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_recordtype';
+			array_push($output, $arrVal);
+		}
+		
+		$sfInterestAttType = "select MAX(LastModifiedDate) as last_update from dv_sf_base_interest_attribute_type HAVING convert(datetime, cast(replace(MAX(LastModifiedDate), 'T', ' ') as varchar(19)), 120) > DATEADD(HOUR, -6, GETDATE()) ";
+		$sfInterestAttTypeRow = $this->fetch_assoc($sfInterestAttType);
+		$output = array();
+		if(count($sfInterestAttTypeRow) == 0){
+			$arrVal['tblname'] = 'dv_sf_base_interest_attribute_type';
+			array_push($output, $arrVal);
+		}
+		
+		return $output;
+		
+	}
+	
+	
 
 	protected function dashQuery($qry, $table) {
 		$tblQry = "SELECT TOP 1 count FROM T_DASHBOARD_CHECK_LOG WHERE table_name='".$table."' AND date < CAST(GETDATE() AS date) ORDER BY date DESC";

@@ -47,6 +47,13 @@ class controlCompare extends modelCompare
 		}
 		echo "Success...\r\n" . $action ." ".$res[$action];
 	}
+	
+	public function etlCheck($type)
+	{		
+		$res = $this->sfInterest();
+		print_r($res);
+		
+	}
 
 	private function sendMail($subject, $message) {
 		$cc = $this->emailCc; 
