@@ -122,14 +122,117 @@ class modelList extends libDatabase
 		$bvm_qry = "SELECT param_value FROM M_PARAM WHERE param_name = 'BVM_LIST_VAL'";
 		$bvm_row = $this->fetch_assoc($bvm_qry);
 		$bvm_param_name = $bvm_row[0]['param_value'];
-		$mappQry = "SELECT UD.cia_user_id, LH.list_id, S.FirstName, S.LastName, LD.contact_name, LD.acc_name, LD.contact_phone_1, LD.contact_phone_2, LD.contact_email, LD.contact_id FROM
+		/*$mappQry = "SELECT
+						UD.cia_user_id,
+						S.HREmplID AS analyst_id,
+						S.FirstName,
+						S.LastName,
+						LD.contact_name,
+						LD.acc_name,
+						LD.contact_phone_1,
+						CASE WHEN ISNULL(LD.contact_phone_2, 'null') = 'null' THEN '' ELSE LD.contact_phone_2 END AS contact_phone_2,
+						LD.contact_email, LD.contact_id
+					FROM
 						T_D_LIST_HEADER LH INNER JOIN T_D_LIST_DETAIL LD ON LH.list_id = LD.list_id
 						INNER JOIN EMPLOYEE_SUMMARY S ON LH.emp_id= S.HREmplID
 						INNER JOIN M_BVM_USER_DETAILS UD ON UD.analyst_id= S.HREmplID
-						WHERE LH.name = '".$bvm_param_name."'  
-						ORDER BY LD.contact_name ASC";// LH.locked_status = '1'
+					WHERE
+						LH.name = '".$bvm_param_name."'  
+					ORDER BY
+						LD.contact_name ASC"; //LH.locked_status = '1'
+		*/
+		$mappQry = "SELECT
+						DISTINCT 
+						UD.cia_user_id
+						,P.category_id AS analyst_id
+						,S.FirstName
+						,S.LastName
+						,C.Name AS contact_name
+						,DC.account_name
+						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
+						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2
+						,DC.contact_email
+						, P.contact_id
+					FROM T_PM_PREFERENCE_DETAILS P
+						INNER JOIN dv_sf_contact C ON C.Id = P.contact_id
+						INNER JOIN D_CONTACT DC ON  DC.contact_id = C.Id 
+						INNER JOIN M_BVM_USER_DETAILS UD ON UD.analyst_id = P.category_id
+						INNER JOIN EMPLOYEE_SUMMARY S ON P.category_id = S.HREmplID
+					WHERE
+						P.cate_type_name = 'Senior Analyst'
+						AND P.report_name = 'Blast Voicemail'
+						AND P.report_format = 'E'
+						AND C.T1C_Base__Inactive__c = 'false'
+						AND C.IsDeleted = 'false'
+						AND (ISNULL(C.Phone,'null')!='null')
+						AND ISNULL(C.mailingCountry,'null') !='null'
+						AND C.MailingCountry IN ('CA','CAN','Canada','U.S.','U.S.A','U.S.A.','United Staes of America','United State','United State of America','United States'
+					,'United States of America','Untied States','US','US Virgin Islands','USA','Virgin Islands, U.S.')
+
+				UNION
+
+					SELECT
+						DISTINCT 
+						UD.cia_user_id
+						,P.category_id AS analyst_id
+						,S.FirstName
+						,S.LastName
+						,C.Name AS contact_name
+						,DC.account_name
+						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
+						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2
+						,DC.contact_email
+						, P.contact_id
+					FROM
+						T_PM_PREFERENCE_DETAILS P
+						INNER JOIN dv_sf_contact C ON C.Id = P.contact_id
+						INNER JOIN D_CONTACT DC ON  DC.contact_id = C.Id 
+						INNER JOIN M_BVM_USER_DETAILS UD ON UD.analyst_id = P.category_id
+						INNER JOIN EMPLOYEE_SUMMARY S ON P.category_id = S.HREmplID
+					WHERE
+						P.cate_type_name = 'Senior Analyst'
+						AND P.report_name = 'Blast Voicemail'
+						AND P.report_format = 'E'
+						AND C.T1C_Base__Inactive__c = 'false'
+						AND C.IsDeleted = 'false'
+						AND (ISNULL(C.Phone,'null') != 'null')
+						AND ISNULL(C.mailingCountry,'null') != 'null'
+						AND (C.Phone LIKE '011%')
+						AND C.MailingCountry NOT IN ('CA','CAN','Canada','U.S.','U.S.A','U.S.A.','United Staes of America','United State','United State of America','United States'
+					,'United States of America','Untied States','US','US Virgin Islands','USA','Virgin Islands, U.S.')
+
+				UNION
+
+					SELECT
+						DISTINCT
+						UD.cia_user_id
+						,P.category_id AS analyst_id
+						,S.FirstName
+						,S.LastName
+						,C.Name AS contact_name
+						,DC.account_name
+						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
+						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2
+						,DC.contact_email
+						, P.contact_id
+					FROM
+						T_PM_PREFERENCE_DETAILS P
+						INNER JOIN dv_sf_contact C ON C.Id = P.contact_id
+						INNER JOIN D_CONTACT DC ON  DC.contact_id = C.Id 
+						INNER JOIN M_BVM_USER_DETAILS UD ON UD.analyst_id = P.category_id
+						INNER JOIN EMPLOYEE_SUMMARY S ON P.category_id = S.HREmplID
+						WHERE
+							P.cate_type_name = 'Senior Analyst'
+							AND P.report_name = 'Blast Voicemail'
+							AND P.report_format = 'E'
+							AND C.T1C_Base__Inactive__c = 'false'
+							AND C.IsDeleted = 'false'
+							AND (ISNULL(C.Phone,'null') !='null')
+							AND ISNULL(C.mailingCountry,'null') != 'null'
+							AND (C.Phone NOT LIKE '011%')
+							AND C.MailingCountry NOT IN ('CA','CAN','Canada','U.S.','U.S.A','U.S.A.','United Staes of America','United State','United State of America','United States'
+					,'United States of America','Untied States','US','US Virgin Islands','USA','Virgin Islands, U.S.')";
 		$mappRow = $this->fetch_assoc($mappQry);
-		
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Data's collected successfully...\r\n");
 		return $mappRow;

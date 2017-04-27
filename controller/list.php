@@ -197,14 +197,11 @@ class controlList extends modellist
 			foreach ($bodyArray as $key => $valArray) {
 				$temp = array();
 				$cia_user_id = $valArray['cia_user_id'];
-				$list_id = $valArray['list_id'];
+				$analyst_id = $valArray['analyst_id'];
 				$analyst_fname = $valArray['FirstName'];
 				$analyst_lname = $valArray['LastName'];
 				$analyst_full_name = $analyst_fname." ".$analyst_lname;
-				
-				$contact_name_arr = explode(" ", $valArray['contact_name']);
-				$contact_fname = $contact_name_arr[0];
-				$contact_lname = end($contact_name_arr);
+				$contact_lname = $valArray['contact_name'];
 				$account_name = $valArray['acc_name'];
 				$contact_phno1 = $valArray['contact_phone_1'];
 				$contact_phno2 = $valArray['contact_phone_2'];
@@ -212,7 +209,7 @@ class controlList extends modellist
 				$contact_id = $valArray['contact_id'];
 				
 				$temp[] = $cia_user_id;
-				$temp[] = $list_id;
+				$temp[] = $analyst_id;
 				$temp[] = $analyst_full_name;
 				$temp[] = $contact_fname;
 				$temp[] = $contact_lname;
