@@ -119,9 +119,10 @@ class modelList extends libDatabase
 	protected function listData() {
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Generating data in model listData()...\r\n");
-		/*$bvm_qry = "SELECT param_value FROM M_PARAM WHERE param_name = 'BVM_LIST_VAL'";
+
+		$bvm_qry = "SELECT param_value FROM M_PARAM WHERE param_name = 'BVM_LIST_VAL'";
 		$bvm_row = $this->fetch_assoc($bvm_qry);
-		$bvm_param_name = $bvm_row[0]['param_value'];*/
+		$bvm_param_name = $bvm_row[0]['param_value'];
 		/*$mappQry = "SELECT
 						UD.cia_user_id,
 						S.HREmplID AS analyst_id,
