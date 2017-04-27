@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 <?php
 class modelCompare extends libDatabase
 {
@@ -204,3 +206,4 @@ class modelCompare extends libDatabase
 	}
 }
 ?>
+>>>>>>> 2e3ad57ebc6f3c2e6224f11f013b46f2c13def7e

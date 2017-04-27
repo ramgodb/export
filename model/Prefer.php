@@ -75,7 +75,7 @@ class modelPrefer extends libDatabase
 				$email_result = $this->query($email_query);
 				if (PHP_SAPI === 'cli') 
 					fwrite(STDERR, "Mail sent to ".$contact_name."---".$to." successfully...\r\n");
-				$sp_query="select Email from EMPLOYEE_SUMMARY where HREmpID='$sponcer_id'";
+				$sp_query="select Email,FirstName from EMPLOYEE_SUMMARY where HREmpID='$sponcer_id'";
 				$sp_result = $this->fetch_assoc($sp_query);
 				//$sp_to=$sp_result[0]['Email'];
 				$sp_to='mkarthikeyan@godbtech.com';
@@ -83,11 +83,13 @@ class modelPrefer extends libDatabase
 				$sp_body="<html>
 					<body>
 						<table style='font-family: Helvetica , sans-serif; font-size: 12px;'>
-							<tr><td>Dear ".$sponcer_name.",</td></tr>
+							<tr><td>Dear ".$sp_result['FirstName'].",</td></tr>
 							<tr><td>&nbsp;</td></tr>
-							<tr><td>Access to Cowen's equity research is granted to ".$contact_name.".</td></tr>
+							<tr><td>Thank you for requesting research library access for ".$contact_name.".</td></tr>
 							<tr><td>&nbsp;</td></tr>
-							<tr><td>Sincerely yours,<br>Robert Fagin <br>Director of Research <br>Cowen and Company </td></tr>
+							<tr><td>An email with detailed information on how to access cowen equity research and temporary login information has been sent to contact.</td></tr>
+							<tr><td>&nbsp;</td></tr>
+							<tr><td><b>Regards<br>Prism Team</b></td></tr>
 							<tr><td>&nbsp;</td></tr>
 						</table>
 					</body>
