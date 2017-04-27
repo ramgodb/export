@@ -119,11 +119,10 @@ class modelList extends libDatabase
 	protected function listData() {
 		if (PHP_SAPI === 'cli') 
 			fwrite(STDERR, "Generating data in model listData()...\r\n");
-
 		/*$bvm_qry = "SELECT param_value FROM M_PARAM WHERE param_name = 'BVM_LIST_VAL'";
 		$bvm_row = $this->fetch_assoc($bvm_qry);
-		$bvm_param_name = $bvm_row[0]['param_value'];*/
-		/*$mappQry = "SELECT
+		$bvm_param_name = $bvm_row[0]['param_value'];
+		$mappQry = "SELECT
 						UD.cia_user_id,
 						S.HREmplID AS analyst_id,
 						S.FirstName,
@@ -145,10 +144,11 @@ class modelList extends libDatabase
 		$mappQry = "SELECT
 						DISTINCT 
 						UD.cia_user_id
-						,P.category_id AS analyst_id
+						,UD.cia_list_id_1
 						,S.FirstName
 						,S.LastName
-						,C.Name AS contact_name
+						,C.FirstName AS cont_fname
+						,C.LastName AS cont_lname
 						,DC.account_name
 						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
 						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2
@@ -175,10 +175,11 @@ class modelList extends libDatabase
 					SELECT
 						DISTINCT 
 						UD.cia_user_id
-						,P.category_id AS analyst_id
+						,UD.cia_list_id_1
 						,S.FirstName
 						,S.LastName
-						,C.Name AS contact_name
+						,C.FirstName AS cont_fname
+						,C.LastName AS cont_lname
 						,DC.account_name
 						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
 						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2
@@ -207,10 +208,11 @@ class modelList extends libDatabase
 					SELECT
 						DISTINCT
 						UD.cia_user_id
-						,P.category_id AS analyst_id
+						,UD.cia_list_id_1
 						,S.FirstName
 						,S.LastName
-						,C.Name AS contact_name
+						,C.FirstName AS cont_fname
+						,C.LastName AS cont_lname
 						,DC.account_name
 						,CASE WHEN ISNULL(DC.contact_phone_1, 'null') = 'null' THEN '' ELSE DC.contact_phone_1 END AS contact_phone_1
 						,CASE WHEN ISNULL(DC.contact_phone_2, 'null') = 'null' THEN '' ELSE DC.contact_phone_2 END AS contact_phone_2

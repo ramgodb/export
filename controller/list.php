@@ -24,7 +24,7 @@ class controlList extends modellist
 		$sub = APP . ' BBM List Management file update : ' . $status;
 		$body = $data;
 		$mail = new libMail();
-		if($mail->send_email(null,$to,$sub,$body,$cc))
+		/*if($mail->send_email(null,$to,$sub,$body,$cc))
 		{
 			if (PHP_SAPI === 'cli') 
 				fwrite(STDERR, "Mail sent successfully...\r\n");
@@ -35,7 +35,7 @@ class controlList extends modellist
 			if (PHP_SAPI === 'cli') 
 				fwrite(STDERR, "Mail sending failed...\r\n");
 			return false;
-		}
+		}*/
 	}
 
 	/******
@@ -197,19 +197,20 @@ class controlList extends modellist
 			foreach ($bodyArray as $key => $valArray) {
 				$temp = array();
 				$cia_user_id = $valArray['cia_user_id'];
-				$analyst_id = $valArray['analyst_id'];
+				$cia_list_id = $valArray['cia_list_id_1'];
 				$analyst_fname = $valArray['FirstName'];
 				$analyst_lname = $valArray['LastName'];
 				$analyst_full_name = $analyst_fname." ".$analyst_lname;
-				$contact_lname = $valArray['contact_name'];
-				$account_name = $valArray['acc_name'];
+				$contact_fname = $valArray['cont_fname'];
+				$contact_lname = $valArray['cont_lname'];
+				$account_name = $valArray['account_name'];
 				$contact_phno1 = $valArray['contact_phone_1'];
 				$contact_phno2 = $valArray['contact_phone_2'];
 				$contact_email = $valArray['contact_email'];
 				$contact_id = $valArray['contact_id'];
 				
 				$temp[] = $cia_user_id;
-				$temp[] = $analyst_id;
+				$temp[] = $cia_list_id;
 				$temp[] = $analyst_full_name;
 				$temp[] = $contact_fname;
 				$temp[] = $contact_lname;
