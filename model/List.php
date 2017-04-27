@@ -169,7 +169,7 @@ class modelList extends libDatabase
 						AND C.MailingCountry IN ('CA','CAN','Canada','U.S.','U.S.A','U.S.A.','United Staes of America','United State','United State of America','United States'
 					,'United States of America','Untied States','US','US Virgin Islands','USA','Virgin Islands, U.S.')
 
-				UNION
+					UNION
 
 					SELECT
 						DISTINCT 
@@ -201,7 +201,7 @@ class modelList extends libDatabase
 						AND C.MailingCountry NOT IN ('CA','CAN','Canada','U.S.','U.S.A','U.S.A.','United Staes of America','United State','United State of America','United States'
 					,'United States of America','Untied States','US','US Virgin Islands','USA','Virgin Islands, U.S.')
 
-				UNION
+					UNION
 
 					SELECT
 						DISTINCT
