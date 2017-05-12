@@ -17,21 +17,19 @@ $dest = (isset($argv[1]) ? $argv[1] : 'bm');
 
 if($dest == 'cia') {
 	
-	$destination = "Cowen-".APP."-".date('dMY').".txt";//If they want to change file
-	$filename = "List_".date('dMY') .'-COWEN-BM'. '.txt';
-	$source = "./assets/export/".$filename;
-
+	$destination = "COWEN".date('mdy').".txt";
+	$source = './assets/export/'.$destination;
 	if(!file_exists($source)) {
 		$output['error'] = true;
 		$output['msg'] = "Source file not available...";
 	} else {
 		//if(strtolower(APP) == 'prod') {
-			$sftp = new Net_SFTP('sftp.callcia.com',22);
-			if (!$sftp->login('cowen&co', 'l1stf33d')) { 
+			$sftp = new Net_SFTP(BM_LIST_SFTP_HOST,22);
+			if (!$sftp->login(BM_LIST_SFTP_USER, BM_LIST_SFTP_PASS)) { 
 				$output['error'] = true;
 				$output['msg'] = "sftp Login Failed...";
 			} else {
-				$result = $sftp->put($destination, $source, NET_SFTP_LOCAL_FILE);
+				$result = $sftp->put('List Upload/'.$destination, $source, NET_SFTP_LOCAL_FILE);
 				
 				if($result) {
 					//echo "file write success";
@@ -43,9 +41,6 @@ if($dest == 'cia') {
 					$output['msg'] = "file write failed...";
 				}
 			}
-		//} else {
-		//	$output['error'] = false;
-		//	$output['msg'] = "file write success...";
 		//}
 	}
 	

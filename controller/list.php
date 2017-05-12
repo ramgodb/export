@@ -186,7 +186,7 @@ class controlList extends modellist
 			fwrite(STDERR, "Starting the process...\r\n");
 		
 		$dataArray = array();
-		$filename = "List_".date('dMY') .'-COWEN-BM'. '.txt';
+		$filename = "COWEN".date('mdy') . '.txt';
 
 		$dataArray['head'] = array();
 		//$dataArray['head'] = array("ListId", "TraderId", "UserName", "FirstName", "LastName", "AccountName",  "PhoneNumber1",  "PhoneNumber2", "Email", "ContactId");
